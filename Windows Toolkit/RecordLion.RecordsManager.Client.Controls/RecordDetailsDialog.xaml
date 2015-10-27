@@ -1,0 +1,14 @@
+﻿<Window x:Class="RecordLion.RecordsManager.Client.Controls.RecordDetailsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RecordLion.RecordsManager.Client.Controls"
+        Title="{x:Static local:LocalStrings.DetailsRecord}" 
+        SizeToContent="Width" Height="600" 
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize">
+    <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <local:RecordDetails x:Name="RecordDetails" />
+        </ScrollViewer>
+    </Grid>
+</Window>

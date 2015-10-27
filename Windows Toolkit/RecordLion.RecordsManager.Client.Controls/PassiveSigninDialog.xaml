@@ -1,0 +1,17 @@
+﻿<Window x:Class="RecordLion.RecordsManager.Client.Controls.PassiveSigninDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RecordLion.RecordsManager.Client.Controls"
+        Title="{x:Static local:LocalStrings.SignIn}" 
+        SizeToContent="WidthAndHeight" 
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize" 
+        Loaded="Window_Loaded">
+    <Grid>
+        <local:PassiveSignin x:Name="SignInControl" 
+                             Height="430" 
+                             Width="370" 
+                             Margin="20,10" 
+                             SignInComplete="SignInControl_SignInComplete"  />
+    </Grid>
+</Window>

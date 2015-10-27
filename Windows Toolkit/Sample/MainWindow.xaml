@@ -1,0 +1,33 @@
+﻿<Window x:Class="Sample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:rmControls="clr-namespace:RecordLion.RecordsManager.Client.Controls;assembly=RecordLion.RecordsManager.Client.Controls"
+        Title="MainWindow" Width="700" SizeToContent="Height">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="175" />            
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Text="Records Manager URL" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
+        <TextBox Name="RMUrl" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalContentAlignment="Center" 
+                 Text="" />
+
+        <TextBlock Text="Records URI" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
+        <TextBox Name="RUri" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalContentAlignment="Center" 
+                 Text="" />
+
+        <Button Grid.Row="2" Grid.ColumnSpan="2" Click="DemoClientButton_Click">Demo Client</Button>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Click="DemoDetailsDialogButton_Click">Demo Details Dialog</Button>
+        <Button Grid.Row="4" Grid.ColumnSpan="2" Click="DemoDetailsControlButton_Click">Demo Details Control</Button>
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Click="DemoManageRecordButton_Click">Demo Manage Record Dialog</Button>        
+    </Grid>
+</Window>

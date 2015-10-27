@@ -1,0 +1,50 @@
+﻿<Window x:Class="RecordLion.RecordsManager.Client.Controls.ManageRecordDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RecordLion.RecordsManager.Client.Controls"
+        Title="{x:Static local:LocalStrings.ManageRecord}"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Width="375" Height="520"
+        Loaded="Window_Loaded">
+    <Window.DataContext>
+        <local:ManageRecordModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style x:Key="NavigationLinkActive" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI Semibold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style x:Key="NavigationLink" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>        
+        <StackPanel Orientation="Horizontal" Margin="5, 5, 0, 15">
+            <TextBlock x:Name="DetailsLink" Text="{x:Static local:LocalStrings.Details}" Style="{StaticResource NavigationLink}"
+                       MouseLeftButtonDown="DetailsLink_MouseLeftButtonDown" />
+            <TextBlock x:Name="RequestLink" Text="{x:Static local:LocalStrings.Request}" Style="{StaticResource NavigationLink}"
+                       MouseLeftButtonDown="RequestLink_MouseLeftButtonDown" />
+            <TextBlock x:Name="ClassificationLink" Text="{x:Static local:LocalStrings.Classification}" Style="{StaticResource NavigationLink}"
+                       MouseLeftButtonDown="ClassificationLink_MouseLeftButtonDown" />
+            <TextBlock x:Name="DeclarationLink" Text="{x:Static local:LocalStrings.Declaration}" Style="{StaticResource NavigationLink}"
+                       MouseLeftButtonDown="DeclarationLink_MouseLeftButtonDown" />
+            <TextBlock x:Name="HoldLink" Text="{x:Static local:LocalStrings.LegalHolds}" Style="{StaticResource NavigationLink}"
+                       MouseLeftButtonDown="HoldLink_MouseLeftButtonDown" />
+            <TextBlock x:Name="AuditLink" Text="{x:Static local:LocalStrings.Audit}" Style="{StaticResource NavigationLink}"
+                       MouseLeftButtonDown="AuditLink_MouseLeftButtonDown" />
+        </StackPanel>
+        <Border Grid.Row="1"
+                x:Name="Host"
+                Padding="10"
+                BorderBrush="{x:Null}">
+            <WebBrowser x:Name="Browser" />
+        </Border>
+    </Grid>
+</Window>

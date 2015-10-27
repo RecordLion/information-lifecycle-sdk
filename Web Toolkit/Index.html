@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample</title>
+    <link href="/style/bootstrap.css" rel="stylesheet"/>
+	<link href="/style/site.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container body-content">
+        <div class="row">
+			<div class="col-md-12">
+				<div style="margin: 0 0 10px 0">
+					<div>
+						Records Manager Url: <input id="rmUrl" type="text" class="form-control" value="" />
+					</div>
+					<div>
+						Records Uri: <input id="rUri" type="text" class="form-control" value="" />
+					</div>
+				</div>
+				<div>
+					<button id="details" type="button" class="btn btn-success">Record Details</button>
+					<button id="declaration" type="button" class="btn btn-success">Record Declaration</button>
+					<button id="classify" type="button" class="btn btn-success">Classify Record</button>            
+					<button id="request" type="button" class="btn btn-success">Request</button>
+					<button id="audit" type="button" class="btn btn-success">Audit</button>
+					<button id="hold" type="button" class="btn btn-success">Legal Hold</button>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div style="margin: 10px 0 0 0; border: 1px solid #ccc; display: inline-block">
+					<div id="placeholder"></div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+	<script src="/script/jquery-1.10.2.js"></script>
+	<script src="/script/rl.recordsmanager.js"></script>
+    <script type="text/javascript">
+        function resetPlaceholder() {
+            $("#placeholder").html("");
+        }
+
+        $(function () {
+            $("#details").click(function () {
+                resetPlaceholder();
+                $("#placeholder").recordDetails($("#rmUrl").val(), $("#rUri").val());
+            });
+
+            $("#declaration").click(function () {
+                resetPlaceholder();
+                $("#placeholder").recordDeclaration($("#rmUrl").val(), $("#rUri").val());
+            });
+
+            $("#classify").click(function () {
+                resetPlaceholder();
+                $("#placeholder").recordClassification($("#rmUrl").val(), $("#rUri").val());
+            });
+
+            $("#audit").click(function () {
+                resetPlaceholder();
+                $("#placeholder").recordAudit($("#rmUrl").val(), $("#rUri").val());
+            });
+
+            $("#request").click(function () {
+                resetPlaceholder();
+                $("#placeholder").recordRequest($("#rmUrl").val(), $("#rUri").val());
+            });
+
+            $("#hold").click(function () {
+                resetPlaceholder();
+                $("#placeholder").legalHold($("#rmUrl").val(), $("#rUri").val());
+            });
+        });
+    </script>
+</body>
+</html>

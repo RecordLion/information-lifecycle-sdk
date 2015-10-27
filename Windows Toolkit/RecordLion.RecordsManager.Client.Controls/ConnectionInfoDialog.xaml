@@ -1,0 +1,23 @@
+﻿<Window x:Class="RecordLion.RecordsManager.Client.Controls.ConnectionInfoDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ConnectionInfoDialog" Height="300" Width="300"
+        xmlns:local="clr-namespace:RecordLion.RecordsManager.Client.Controls">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <local:ConnectionInfo Grid.Row="0"
+                              x:Name="ConnectionInfo" 
+                              Updated="ConnectionInfo_Updated" />
+        <TextBlock Grid.Row="1"
+                   x:Name="Message" />
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal">
+            <Button x:Name="Ok" Click="Ok_Click" Margin="5" />
+            <Button x:Name="Cancel" Click="Cancel_Click" Margin="5" />
+        </StackPanel>
+    </Grid>
+</Window>
