@@ -5,6 +5,7 @@ namespace RecordLion.RecordsManager.Client
 {
     public class RetentionTrigger
     {
+        //Common Properties
         public long Id { get; set; }
 
         public string Title { get; set; }
@@ -17,8 +18,10 @@ namespace RecordLion.RecordsManager.Client
 
         public RetentionTriggerType TriggerType { get; set; }
 
+
         //Date Property Trigger Properties
         public string PropertyName { get; set; }
+
 
         //Event Trigger Properties
         public DateTime? NextEventDate { get; set; }
@@ -27,6 +30,12 @@ namespace RecordLion.RecordsManager.Client
 
         public RetentionEventPosition AssignmentPosition { get; set; }
 
+
+        //Rule Trigger Properties
+        public Rule[] TriggerRules { get; set; }
+
+
+        //Special Trigger Properties
         public RetentionTriggerSpecialType SpecialType { get; set; }
     }
 }

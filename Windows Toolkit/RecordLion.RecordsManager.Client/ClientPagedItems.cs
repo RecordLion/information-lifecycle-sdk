@@ -14,6 +14,8 @@ namespace RecordLion.RecordsManager.Client
 
         public int PageCount { get; set; }
 
+        public int TotalCount { get; set; }
+
         public int ItemCount
         {
             get

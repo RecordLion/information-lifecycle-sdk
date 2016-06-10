@@ -2628,9 +2628,9 @@ namespace RecordLion.RecordsManager.Client
         private const string PUT_INBOX_ACTIONITEM_DISMISS = "/api/v1/actionitemsinbox?dismiss=true&id={0}";
         private const string PUT_INBOX_ACTIONITEM_RETRY = "/api/v1/actionitemsinbox?retry=true&id={0}";
         private const string PUT_INBOX_ACTIONITEM_COMPLETED = "/api/v1/actionitemsinbox?complete=true&id={0}";
-        private const string PUT_INBOX_ACTIONITEMS_APPROVE_CASE = "/api/v1/actionitemsinbox?caseFileId={0}&expiringOnOrBefore={1}&phaseOrder={2}&phaseAction={3}&automationFailed={4}&automationUnsupported={5}";
-        private const string PUT_INBOX_ACTIONITEMS_DISMISS_CASE = "/api/v1/actionitemsinbox?caseFileId={0}&expiringOnOrBefore={1}&phaseOrder={2}&phaseAction={3}&automationFailed={4}&automationUnsupported={5}";
-        private const string PUT_INBOX_ACTIONITEMS_RETRY_CASE = "/api/v1/actionitemsinbox?caseFileId={0}&expiringOnOrBefore={1}&phaseOrder={2}&phaseAction={3}&automationFailed={4}&automationUnsupported={5}";
+        private const string PUT_INBOX_ACTIONITEMS_APPROVE_CASE = "/api/v1/actionitemsinbox?approve=true&caseFileId={0}&expiringOnOrBefore={1}&phaseOrder={2}&phaseAction={3}&isApproved={4}&automationFailed={5}&automationUnsupported={6}";
+        private const string PUT_INBOX_ACTIONITEMS_DISMISS_CASE = "/api/v1/actionitemsinbox?dismiss=true&caseFileId={0}&expiringOnOrBefore={1}&phaseOrder={2}&phaseAction={3}&isApproved={4}&automationFailed={5}&automationUnsupported={6}";
+        private const string PUT_INBOX_ACTIONITEMS_RETRY_CASE = "/api/v1/actionitemsinbox?retry=true&caseFileId={0}&expiringOnOrBefore={1}&phaseOrder={2}&phaseAction={3}&isApproved={4}&automationFailed={5}&automationUnsupported={6}";
         
         private const string GET_AUDIT_LASTEDIT = "/api/v1/audit?lastedit";
         private const string GET_AUDIT_ALL = "/api/v1/audit?page={0}&pageSize={1}";

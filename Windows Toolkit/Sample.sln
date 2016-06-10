@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{B3374A26-E690-4BDA-BAEC-732C4884E644}"
 EndProject
@@ -34,20 +34,20 @@ Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://recordlion.visualstudio.com/defaultcollection
+		SccTeamFoundationServer = https://recordlion.visualstudio.com/
 		SccProjectUniqueName0 = Sample\\Sample.csproj
 		SccProjectName0 = Sample
-		SccAuxPath0 = https://recordlion.visualstudio.com/defaultcollection
+		SccAuxPath0 = https://recordlion.visualstudio.com
 		SccLocalPath0 = Sample
 		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName1 = RecordLion.RecordsManager.Client\\RecordLion.RecordsManager.Client.csproj
 		SccProjectName1 = RecordLion.RecordsManager.Client
-		SccAuxPath1 = https://recordlion.visualstudio.com/defaultcollection
+		SccAuxPath1 = https://recordlion.visualstudio.com
 		SccLocalPath1 = RecordLion.RecordsManager.Client
 		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName2 = RecordLion.RecordsManager.Client.Controls\\RecordLion.RecordsManager.Client.Controls.csproj
 		SccProjectName2 = RecordLion.RecordsManager.Client.Controls
-		SccAuxPath2 = https://recordlion.visualstudio.com/defaultcollection
+		SccAuxPath2 = https://recordlion.visualstudio.com
 		SccLocalPath2 = RecordLion.RecordsManager.Client.Controls
 		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 	EndGlobalSection

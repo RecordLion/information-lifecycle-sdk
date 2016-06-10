@@ -22,7 +22,7 @@ namespace RecordLion.RecordsManager.Client
 
         public DateTime ModifiedDate { get; set; }
 
-        public LegalHoldRule[] HoldRules { get; set; }
+        public Rule[] HoldRules { get; set; }
 
         public bool IsOpen
         {

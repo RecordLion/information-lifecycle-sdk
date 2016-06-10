@@ -7,6 +7,7 @@ namespace RecordLion.RecordsManager.Client
     {
         Event,
         DateProperty, 
+        Rule,
         Special
     }
 }

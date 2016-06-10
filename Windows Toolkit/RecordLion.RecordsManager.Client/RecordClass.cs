@@ -21,13 +21,17 @@ namespace RecordLion.RecordsManager.Client
 
         public int Priority { get; set; }
 
-        public bool KeepDeletedAudits { get; set; }
+        public bool ArchiveRecords { get; set; }
+
+        public bool ArchiveRecordProperties { get; set; }
+        
+        public bool ArchiveRecordAudits { get; set; }
 
         public RecordClassRecordDeclarationRule RecordDeclarationRule { get; set; }
 
         public RecordClassVitalRule VitalRule { get; set; }
 
-        public RecordClassificationRule[] ClassificationRules { get; set; }
+        public Rule[] ClassificationRules { get; set; }
         
         public DateTime? FirstUsedDate { get; set; }
 
