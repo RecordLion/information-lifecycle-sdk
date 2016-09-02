@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationApp", "Integrations\IntegrationApp\IntegrationApp.csproj", "{05AFF8A3-3E85-4460-B86E-F7855FA46BEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordLion.RecordsManager.Client", "RecordLion.RecordsManager.Client\RecordLion.RecordsManager.Client.csproj", "{FB66F897-C444-4A64-9885-45D3D6D167B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Azure.Debug|Any CPU = Azure.Debug|Any CPU
+		Azure.Release|Any CPU = Azure.Release|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05AFF8A3-3E85-4460-B86E-F7855FA46BEF}.Azure.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05AFF8A3-3E85-4460-B86E-F7855FA46BEF}.Azure.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05AFF8A3-3E85-4460-B86E-F7855FA46BEF}.Azure.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05AFF8A3-3E85-4460-B86E-F7855FA46BEF}.Azure.Release|Any CPU.Build.0 = Release|Any CPU
+		{05AFF8A3-3E85-4460-B86E-F7855FA46BEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05AFF8A3-3E85-4460-B86E-F7855FA46BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05AFF8A3-3E85-4460-B86E-F7855FA46BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05AFF8A3-3E85-4460-B86E-F7855FA46BEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Azure.Debug|Any CPU.ActiveCfg = Azure.Debug|Any CPU
+		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Azure.Debug|Any CPU.Build.0 = Azure.Debug|Any CPU
+		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Azure.Release|Any CPU.ActiveCfg = Azure.Release|Any CPU
+		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Azure.Release|Any CPU.Build.0 = Azure.Release|Any CPU
+		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://recordlion.visualstudio.com/
+		SccProjectUniqueName0 = Integrations\\IntegrationApp\\IntegrationApp.csproj
+		SccProjectName0 = Integrations/IntegrationApp
+		SccLocalPath0 = Integrations\\IntegrationApp
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = RecordLion.RecordsManager.Client\\RecordLion.RecordsManager.Client.csproj
+		SccProjectName2 = RecordLion.RecordsManager.Client
+		SccLocalPath2 = RecordLion.RecordsManager.Client
+	EndGlobalSection
+EndGlobal

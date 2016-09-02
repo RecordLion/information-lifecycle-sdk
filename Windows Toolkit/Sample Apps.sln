@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{B3374A26-E690-4BDA-BAEC-732C4884E644}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordLion.RecordsManager.Client", "RecordLion.RecordsManager.Client\RecordLion.RecordsManager.Client.csproj", "{FB66F897-C444-4A64-9885-45D3D6D167B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordLion.RecordsManager.Client.Controls", "RecordLion.RecordsManager.Client.Controls\RecordLion.RecordsManager.Client.Controls.csproj", "{D8D2CCB3-0CD1-4B9D-980E-EDA7BF350B89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Apps\Sample\Sample.csproj", "{B3374A26-E690-4BDA-BAEC-732C4884E644}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB66F897-C444-4A64-9885-45D3D6D167B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{D8D2CCB3-0CD1-4B9D-980E-EDA7BF350B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8D2CCB3-0CD1-4B9D-980E-EDA7BF350B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8D2CCB3-0CD1-4B9D-980E-EDA7BF350B89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,20 +35,20 @@ Global
 		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://recordlion.visualstudio.com/
-		SccProjectUniqueName0 = Sample\\Sample.csproj
-		SccProjectName0 = Sample
+		SccProjectUniqueName0 = RecordLion.RecordsManager.Client\\RecordLion.RecordsManager.Client.csproj
+		SccProjectName0 = RecordLion.RecordsManager.Client
 		SccAuxPath0 = https://recordlion.visualstudio.com
-		SccLocalPath0 = Sample
+		SccLocalPath0 = RecordLion.RecordsManager.Client
 		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName1 = RecordLion.RecordsManager.Client\\RecordLion.RecordsManager.Client.csproj
-		SccProjectName1 = RecordLion.RecordsManager.Client
+		SccProjectUniqueName1 = RecordLion.RecordsManager.Client.Controls\\RecordLion.RecordsManager.Client.Controls.csproj
+		SccProjectName1 = RecordLion.RecordsManager.Client.Controls
 		SccAuxPath1 = https://recordlion.visualstudio.com
-		SccLocalPath1 = RecordLion.RecordsManager.Client
+		SccLocalPath1 = RecordLion.RecordsManager.Client.Controls
 		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName2 = RecordLion.RecordsManager.Client.Controls\\RecordLion.RecordsManager.Client.Controls.csproj
-		SccProjectName2 = RecordLion.RecordsManager.Client.Controls
+		SccProjectUniqueName2 = Apps\\Sample\\Sample.csproj
+		SccProjectName2 = Apps/Sample
 		SccAuxPath2 = https://recordlion.visualstudio.com
-		SccLocalPath2 = RecordLion.RecordsManager.Client.Controls
+		SccLocalPath2 = Apps\\Sample
 		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 	EndGlobalSection
 EndGlobal

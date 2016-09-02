@@ -9,7 +9,7 @@ namespace RecordLion.RecordsManager.Client
 
         public DateTime EventDate { get; set; }
 
-        public int EventTriggerId { get; set; }
+        public long EventTriggerId { get; set; }
 
         public EventOccurrenceTargetType TargetType { get; set; }
 
