@@ -16,9 +16,10 @@ RecordLion.RecordsManager.Client.Controls.dll | Contain a set of reusable Window
 RecordLion.Resources.dll | Contains localized resources
 
 ## Third-Party Dependencies
-The third-party dependencies listed below are required for buildling custom integrations.
+The third-party dependencies listed below are required for buildling custom integrations.  
+
 Dependency | Description
----        | ---
+---  | ---
 Microsoft.IdentityModel.dll (v3.5) | Contains Window Identity Foundation Framework.  This can be installed from the Microsoft Downloads Site or if you have using Windows Server 2012, you should install using: `Add Windows Role and Features\Features\Windows Communication Foundation v3.5`
 Newtonsoft.Json.dll	| This assembly contains the JSON.NET parser for parsing JSON.  It is included in the SDK, but can also be referenced from Nuget under the package name JSON.NET.
 PresentationCore.dll | Core WPF Dependency – Required only if using RecordLion.RecordsManager.Client.Controls.dll
