@@ -1,6 +1,6 @@
 # Information Lifecycle Client Object Model
 ## Authentication Component
----
+
 The `RecordsManagerCredentials` class lets a developer connect to the 
 Information Lifecycle API (API) using one of the following `RecordsManagerCredentialType`
 enumerations:
