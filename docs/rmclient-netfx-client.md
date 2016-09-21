@@ -97,7 +97,8 @@ client.DeclareRecord("http://full_url_of_item");
 This allows Information Lifecycle to track an item/document. Typically, a Connector will
 perform Recordization during its classification job.
 >Manual classification will force Information Lifecycle to use the assigned record class ID.  
->To use automatic classification, set `IsManuallyClassified` to `false` and do not send a record class ID.
+>To use automatic classification, set `IsManuallyClassified` to `false` and do not send a record class ID.  
+
 ```cs
 //Create a new client using default network credentials
 IRecordsManagerClient client = new RecordsManagerClient(url);
