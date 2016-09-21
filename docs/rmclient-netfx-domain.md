@@ -1,6 +1,6 @@
 # Information Lifecycle Client Object Model
 ## Domain Objects Component
----
+
 There are many domain objects in the client side object model (CSOM). These domain
 objects, or entities, are used to marshall data from the Information Lifecycle API (API)
 into objects a developer can easily use when writing source code.
@@ -10,7 +10,7 @@ CSOM.
 >Explore the source code to find additional objects to meet your specific requirements. 
 
 ## Classes
----
+
 `RetentionTrigger`  
 Represents a Trigger in the file plan. Trigger are used to determine a record's retention 
 expiration.
