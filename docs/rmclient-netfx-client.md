@@ -1,6 +1,6 @@
 # Information Lifecycle Client Object Model
 ## Client Component
----
+
 The `RecordsManagerClient` class implements the `IRecordsManagerClient` interface
 and makes it easy for the developer to call the Information Lifecycle API (API). It is
 the central object used to remotely communicate with the Server. Several constructors
@@ -13,13 +13,11 @@ executing any API requests.
 **Assembly:** RecordLion.RecordsManager.Client.dll
 
 ## Syntax
----
 ```cs
 public sealed class RecordsManagerClient : IRecordsManagerClient
 ```
 
 ## Constructors
----
 `RecordsManagerClient()`  
 Creates an instance of the client using default Windows network credentials.
 
@@ -41,7 +39,6 @@ Creates an instance of the client using the specified URL to the server and the 
 `CookieContainer` instance.
 
 ## Properties
----
 `Url: string`  
 Gets or sets the base URL for the API server.
 
@@ -63,14 +60,13 @@ Gets the Issuer response from the Information Lifecycle STS server's WS-Trust en
 authenticate Claims users.
 
 ## Examples
----
+The following examples demonstrate several uses of the Client.
 ### Getting a Record by ID
 ```cs
 //Create a new client using default network credentials
 IRecordsManagerClient client = new RecordsManagerClient(url);
 Record record = client.GetRecord("{03E593CB-AF1A-4D5C-9BCA-3ADB8DE24C8F}");
 ```
----
 
 ### Getting a Record by Uri
 ```cs
@@ -78,7 +74,6 @@ Record record = client.GetRecord("{03E593CB-AF1A-4D5C-9BCA-3ADB8DE24C8F}");
 IRecordsManagerClient client = new RecordsManagerClient(url);
 Record record = client.GetRecordByUri("http://full_url_of_item");
 ```
----
 
 ### Searching For Records
 It is possible to search with a partial Uri or Title as well.
@@ -87,7 +82,6 @@ It is possible to search with a partial Uri or Title as well.
 IRecordsManagerClient client = new RecordsManagerClient(url);
 IEnumerable<Record> records = client.SearchRecords("TitleOrUri");
 ```
----
 
 ### Mark a Managed Item/Document as a Declared Record
 An item/document can only be a declared record if it is managed by Records Manager.
@@ -98,7 +92,6 @@ In Records Manager, this process is known as Recordizing an item/document.
 IRecordsManagerClient client = new RecordsManagerClient(url);
 client.DeclareRecord("http://full_url_of_item"); 
 ```
----
 
 ### Recordizing an Item/Document
 This allows Information Lifecycle to track an item/document. Typically, a Connector will
@@ -122,7 +115,6 @@ IEnumerable<Record> records = client.ProcessRecordization(
         }
     });
 ```
----
 
 ### Removing an Item/Document (Un-Recordizing)
 You can ask Information Lifecycle to remove an item/document and no longer track it. Typically,
@@ -141,7 +133,6 @@ IEnumerable<Record> records = client.ProcessRecordization(
         }
     });
 ```
----
 
 ### Getting a Records Schedule
 ```cs
