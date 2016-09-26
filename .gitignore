@@ -1,3 +1,7 @@
+##Strong Name Key files...glob pattern should ignore any casing of the extension
+*.[sS][nN][kK]
+
+
 #################
 ## Eclipse
 #################
