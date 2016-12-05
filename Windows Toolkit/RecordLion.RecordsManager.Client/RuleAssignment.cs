@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace RecordLion.RecordsManager.Client
 {
-    public class Rule
+    public class RuleAssignment
     {
         public long Id { get; set; }
 
@@ -20,5 +20,9 @@ namespace RecordLion.RecordsManager.Client
         public bool IsCaseSensitive { get; set; }
 
         public RuleJoin Join { get; set; }
+
+        public long? RuleSetRefId { get; set; }
+
+        public long? RuleRefId { get; set; }
     }
 }

@@ -232,6 +232,15 @@ namespace RecordLion.RecordsManager.Client.Controls {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        public static string Properties {
+            get {
+                return ResourceManager.GetString("Properties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Record.
         /// </summary>
         public static string Record {

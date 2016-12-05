@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordLion.RecordsManager.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Apps\Sample\Sample.csproj", "{B3374A26-E690-4BDA-BAEC-732C4884E644}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordLion.RecordsManager.Client.Azure", "RecordLion.RecordsManager.Client.Azure\RecordLion.RecordsManager.Client.Azure.csproj", "{27818309-4C5F-4CD4-92B6-51321143F7B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,28 +29,12 @@ Global
 		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3374A26-E690-4BDA-BAEC-732C4884E644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27818309-4C5F-4CD4-92B6-51321143F7B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27818309-4C5F-4CD4-92B6-51321143F7B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27818309-4C5F-4CD4-92B6-51321143F7B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27818309-4C5F-4CD4-92B6-51321143F7B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://recordlion.visualstudio.com/
-		SccProjectUniqueName0 = RecordLion.RecordsManager.Client\\RecordLion.RecordsManager.Client.csproj
-		SccProjectName0 = RecordLion.RecordsManager.Client
-		SccAuxPath0 = https://recordlion.visualstudio.com
-		SccLocalPath0 = RecordLion.RecordsManager.Client
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName1 = RecordLion.RecordsManager.Client.Controls\\RecordLion.RecordsManager.Client.Controls.csproj
-		SccProjectName1 = RecordLion.RecordsManager.Client.Controls
-		SccAuxPath1 = https://recordlion.visualstudio.com
-		SccLocalPath1 = RecordLion.RecordsManager.Client.Controls
-		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName2 = Apps\\Sample\\Sample.csproj
-		SccProjectName2 = Apps/Sample
-		SccAuxPath2 = https://recordlion.visualstudio.com
-		SccLocalPath2 = Apps\\Sample
-		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 	EndGlobalSection
 EndGlobal

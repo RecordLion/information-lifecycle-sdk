@@ -21,7 +21,6 @@ namespace RecordLion.RecordsManager.Client
 
         SystemInfo GetSystemInfo();
 
-
         string NewRMUID();
 
         #region Record Classes
@@ -493,6 +492,9 @@ namespace RecordLion.RecordsManager.Client
         RecordClassLifecycle GetRecordClassLifecycle(long id);
 
 
+        RecordClassLifecycle GetRecordClassLifecycleForRecordClass(long recordClassId);
+
+
         RecordClassLifecycle CreateRecordClassLifecycle(RecordClassLifecycle recordClassLifecycle);
 
 
@@ -947,6 +949,49 @@ namespace RecordLion.RecordsManager.Client
 
 
         void DeleteManagedProperty(long id);
+
+        #endregion
+
+
+        #region Rule Sets
+
+        string GetRuleSetsAsJson();
+
+
+        string GetRuleSetsAsJson(int page, int pageSize);
+
+
+        IEnumerable<RuleSet> GetRuleSetsFromJson(string json);
+
+
+        IClientPagedItems<RuleSet> GetRuleSetsWithPageDataFromJson(string json);
+
+
+        DateTime GetRuleSetsLastEdit();
+
+
+        IEnumerable<RuleSet> SearchRuleSets(string title);
+
+
+        IClientPagedItems<RuleSet> SearchRuleSets(string title, int page, int pageSize);
+
+
+        IEnumerable<RuleSet> GetRuleSets();
+
+
+        IClientPagedItems<RuleSet> GetRuleSets(int page, int pageSize);
+
+
+        RuleSet GetRuleSet(long id);
+
+
+        RuleSet CreateRuleSet(RuleSet ruleSet);
+
+
+        RuleSet UpdateRuleSet(RuleSet ruleSet);
+
+
+        void DeleteRuleSet(long id);
 
         #endregion
     }

@@ -38,3 +38,18 @@ var claims = new RecordsManagerCredentials();
 ```cs
 var claims = new RecordsManagerCredentials("domain\\user", "password", RecordsManagerCredentialType.Claims);
 ```
+
+### Information Lifecycle Service (SaaS)
+---
+
+If you're connecting to the RecordLion Information Lifecycle Service in the cloud, you should reference the `RecordLion.RecordsManager.Client.Azure` project which will require .NET 4.5+
+
+This project provides the `RecordLion.RecordsManager.Client.RecordsManagerClientFactory` class that will properly construct an instance of `RecordsManagerClient` that can properly authenticate with Information Lifecycle on-premise or the Information Lifecycle Service in the cloud.
+
+All constructoer overloads of `RecordsManagerClient` are represented by `RecordsManagerClientFactory.Create`
+
+#### Code Example - Connecting to the cloud-based Information Lifecycle Service (or Information Lifecycle on-premise)
+
+```cs
+var client = RecordsManagerClientFactory.Create("domain\\user", "password");
+```

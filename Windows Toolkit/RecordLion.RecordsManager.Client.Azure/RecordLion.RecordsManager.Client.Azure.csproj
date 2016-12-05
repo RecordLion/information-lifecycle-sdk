@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{05AFF8A3-3E85-4460-B86E-F7855FA46BEF}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{27818309-4C5F-4CD4-92B6-51321143F7B3}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IntegrationApp</RootNamespace>
-    <AssemblyName>IntegrationApp</AssemblyName>
+    <RootNamespace>RecordLion.RecordsManager.Client.Azure</RootNamespace>
+    <AssemblyName>RecordLion.RecordsManager.Client.Azure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -18,7 +18,6 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,54 +25,50 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=3.13.5.907, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.13.5\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.13.5\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform, Version=3.13.5.907, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.13.5\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.13.5\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventOccurrenceIntegration.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RetentionTriggerIntegrations.cs" />
+    <Compile Include="RecordsManagerClientFactory.cs" />
+    <Compile Include="SecurityTokenRequestorAzureOAuth2.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\RecordLion.RecordsManager.Client.Azure\RecordLion.RecordsManager.Client.Azure.csproj">
-      <Project>{27818309-4c5f-4cd4-92b6-51321143f7b3}</Project>
-      <Name>RecordLion.RecordsManager.Client.Azure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RecordLion.RecordsManager.Client\RecordLion.RecordsManager.Client.csproj">
+    <ProjectReference Include="..\RecordLion.RecordsManager.Client\RecordLion.RecordsManager.Client.csproj">
       <Project>{fb66f897-c444-4a64-9885-45d3d6d167b7}</Project>
       <Name>RecordLion.RecordsManager.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

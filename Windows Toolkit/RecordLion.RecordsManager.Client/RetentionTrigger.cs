@@ -32,7 +32,7 @@ namespace RecordLion.RecordsManager.Client
 
 
         //Rule Trigger Properties
-        public Rule[] TriggerRules { get; set; }
+        public RuleAssignment[] TriggerRules { get; set; }
 
 
         //Special Trigger Properties

@@ -12,7 +12,7 @@ namespace IntegrationApp
             string url = Console.ReadLine();
 
             //Create a new client using default network credentials
-            IRecordsManagerClient client = new RecordsManagerClient(url);
+            IRecordsManagerClient client = RecordsManagerClientFactory.Create(url);
 
             //Currently for a production scenario, you would need to get the retention trigger by ID
             //This sample finds the first manual, event-based, retention trigger and uses that instead.

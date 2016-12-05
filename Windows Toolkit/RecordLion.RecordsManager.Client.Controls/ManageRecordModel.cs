@@ -89,6 +89,8 @@ namespace RecordLion.RecordsManager.Client.Controls
                         return string.Format("{0}/legalhold/createapi?uri={1}&api=true", url, this.RecordUri);
                     case ManageRecordMode.Request:
                         return string.Format("{0}/request/record?uri={1}&api=true", url, this.RecordUri);
+                    case ManageRecordMode.Properties:
+                        return string.Format("{0}/record/propertiesbyuri?uri={1}&api=true", url, this.RecordUri);
                 }
 
                 return null;
@@ -110,6 +112,7 @@ namespace RecordLion.RecordsManager.Client.Controls
                     case ManageRecordMode.Audit:
                     case ManageRecordMode.Details:
                     case ManageRecordMode.Request:
+                    case ManageRecordMode.Properties:
                     default:
                         return 650;
                 }
@@ -131,6 +134,7 @@ namespace RecordLion.RecordsManager.Client.Controls
                     case ManageRecordMode.Classification:
                     case ManageRecordMode.LegalHolds:
                     case ManageRecordMode.Declaration:
+                    case ManageRecordMode.Properties:
                     default:
                         return 600;
                 }
@@ -177,41 +181,6 @@ namespace RecordLion.RecordsManager.Client.Controls
                 this.error = value;
                 this.OnPropertyChanged("Error");
             }
-        }
-
-
-        public void InitializeRecord(CookieContainer cookies)
-        {
-            var client = new RecordsManagerClient(this.RecordsManagerUrl, cookies);
-
-            ThreadPool.QueueUserWorkItem(state =>
-            {
-                Application.Current.Dispatcher.Invoke(new Action(() => 
-                {                  
-                    try
-                    {
-                        this.Record = client.GetRecordByUri(this.RecordUri);
-                        this.IsLoggedIn = true;
-                    }
-                    catch (WebException ex)
-                    {
-                        if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.Unauthorized)
-                            this.IsLoggedIn = false;
-                        else
-                            this.Error = ex;
-                    }
-                    catch (Exception ex)
-                    {
-                        this.Error = ex;
-                    }
-                })); 
-            });
-        }
-
-        public void Logout()
-        {
-            this.IsLoggedIn = false;
-            this.Record = null;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace RecordLion.RecordsManager.Client
 
         public RecordClassVitalRule VitalRule { get; set; }
 
-        public Rule[] ClassificationRules { get; set; }
+        public RuleAssignment[] ClassificationRules { get; set; }
         
         public DateTime? FirstUsedDate { get; set; }
 
@@ -56,5 +56,7 @@ namespace RecordLion.RecordsManager.Client
         public bool? IsCaseFile { get; set; }
 
         public string CaseFileRule { get; set; }
+
+        public bool UniqueLifecycle { get; set; }
     }
 }

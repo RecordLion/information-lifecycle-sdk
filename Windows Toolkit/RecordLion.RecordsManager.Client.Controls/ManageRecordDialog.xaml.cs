@@ -33,6 +33,90 @@ namespace RecordLion.RecordsManager.Client.Controls
             }
         }
 
+        public bool HideDetailsLink
+        {
+            get
+            {
+                return this.DetailsLink.Visibility == Visibility.Visible;
+            }
+            set
+            {
+                this.DetailsLink.Visibility = (value) ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public bool HideClassificationLink
+        {
+            get
+            {
+                return this.ClassificationLink.Visibility == Visibility.Visible;
+            }
+            set
+            {
+                this.ClassificationLink.Visibility = (value) ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public bool HideDeclarationLink
+        {
+            get
+            {
+                return this.DeclarationLink.Visibility == Visibility.Visible;
+            }
+            set
+            {
+                this.DeclarationLink.Visibility = (value) ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public bool HideHoldsLink
+        {
+            get
+            {
+                return this.HoldLink.Visibility == Visibility.Visible;
+            }
+            set
+            {
+                this.HoldLink.Visibility = (value) ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public bool HideAuditLink
+        {
+            get
+            {
+                return this.AuditLink.Visibility == Visibility.Visible;
+            }
+            set
+            {
+                this.AuditLink.Visibility = (value) ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public bool HideRequestLink
+        {
+            get
+            {
+                return this.RequestLink.Visibility == Visibility.Visible;
+            }
+            set
+            {
+                this.RequestLink.Visibility = (value) ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public bool HidePropertiesLink
+        {
+            get
+            {
+                return this.PropertiesLink.Visibility == Visibility.Visible;
+            }
+            set
+            {
+                this.PropertiesLink.Visibility = (value) ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -99,7 +183,12 @@ namespace RecordLion.RecordsManager.Client.Controls
             this.Model.Mode = ManageRecordMode.Details;
             this.SetActive((TextBlock)sender);
         }
-    
+
+        private void PropertiesLink_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.Model.Mode = ManageRecordMode.Properties;
+            this.SetActive((TextBlock)sender);
+        }
 
 
         private void SetActive(TextBlock active)
@@ -110,6 +199,7 @@ namespace RecordLion.RecordsManager.Client.Controls
             this.ClassificationLink.Style = this.FindResource("NavigationLink") as Style;
             this.RequestLink.Style = this.FindResource("NavigationLink") as Style;
             this.DetailsLink.Style = this.FindResource("NavigationLink") as Style;
+            this.PropertiesLink.Style = this.FindResource("NavigationLink") as Style;
 
             active.Style = this.FindResource("NavigationLinkActive") as Style;
         }
@@ -121,6 +211,7 @@ namespace RecordLion.RecordsManager.Client.Controls
 
             this.Model.Error = null;
         }
+
 
         public void Dispose()
         {

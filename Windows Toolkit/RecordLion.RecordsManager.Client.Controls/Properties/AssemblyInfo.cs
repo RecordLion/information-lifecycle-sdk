@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("RecordLion")]
 [assembly: AssemblyProduct("RecordLion.RecordsManager.Client.Controls")]
-[assembly: AssemblyCopyright("Copyright © RecordLion 2015")]
+[assembly: AssemblyCopyright("Copyright © RecordLion 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -39,5 +39,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyVersion("4.2.0.0")]
+[assembly: AssemblyFileVersion("4.2.0.0")]

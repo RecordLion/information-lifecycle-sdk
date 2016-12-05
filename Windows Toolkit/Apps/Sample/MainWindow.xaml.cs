@@ -39,7 +39,7 @@ namespace Sample
         {
             CookieContainer cookieContainer = this.Signin();
 
-            RecordsManagerClient client = new RecordsManagerClient(this.RMUrl.Text, cookieContainer);
+            RecordsManagerClient client = RecordsManagerClientFactory.Create(this.RMUrl.Text, cookieContainer);
             MessageBox.Show(client.GetRecordsLastEdit().ToString());
         }            
 

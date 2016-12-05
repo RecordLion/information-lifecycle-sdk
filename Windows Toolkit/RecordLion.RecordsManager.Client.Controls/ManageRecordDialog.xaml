@@ -29,8 +29,6 @@
         <StackPanel Orientation="Horizontal" Margin="5, 5, 0, 15">
             <TextBlock x:Name="DetailsLink" Text="{x:Static local:LocalStrings.Details}" Style="{StaticResource NavigationLink}"
                        MouseLeftButtonDown="DetailsLink_MouseLeftButtonDown" />
-            <TextBlock x:Name="RequestLink" Text="{x:Static local:LocalStrings.Request}" Style="{StaticResource NavigationLink}"
-                       MouseLeftButtonDown="RequestLink_MouseLeftButtonDown" />
             <TextBlock x:Name="ClassificationLink" Text="{x:Static local:LocalStrings.Classification}" Style="{StaticResource NavigationLink}"
                        MouseLeftButtonDown="ClassificationLink_MouseLeftButtonDown" />
             <TextBlock x:Name="DeclarationLink" Text="{x:Static local:LocalStrings.Declaration}" Style="{StaticResource NavigationLink}"
@@ -39,6 +37,10 @@
                        MouseLeftButtonDown="HoldLink_MouseLeftButtonDown" />
             <TextBlock x:Name="AuditLink" Text="{x:Static local:LocalStrings.Audit}" Style="{StaticResource NavigationLink}"
                        MouseLeftButtonDown="AuditLink_MouseLeftButtonDown" />
+            <TextBlock x:Name="RequestLink" Text="{x:Static local:LocalStrings.Request}" Style="{StaticResource NavigationLink}"
+                       MouseLeftButtonDown="RequestLink_MouseLeftButtonDown" />
+            <TextBlock x:Name="PropertiesLink" Text="{x:Static local:LocalStrings.Properties}" Style="{StaticResource NavigationLink}"
+                       MouseLeftButtonDown="PropertiesLink_MouseLeftButtonDown" />
         </StackPanel>
         <Border Grid.Row="1"
                 x:Name="Host"

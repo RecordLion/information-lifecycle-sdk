@@ -10,6 +10,7 @@ namespace RecordLion.RecordsManager.Client.Controls
         Declaration,
         Classification,        
         Audit,
-        LegalHolds        
+        LegalHolds,
+        Properties
     }
 }

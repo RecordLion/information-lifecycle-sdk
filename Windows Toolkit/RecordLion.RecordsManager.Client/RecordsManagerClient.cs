@@ -29,19 +29,19 @@ namespace RecordLion.RecordsManager.Client
         private CookieContainer cookieContainer = null;
         private ISecurityTokenRequestor securityTokenRequestor = null;
         private string issuer = string.Empty;
-        private GenericXmlSecurityToken token = null;
+        private SecurityToken token = null;
 
-        public RecordsManagerClient() : this(null, new RecordsManagerCredentials(), new DefaultSecurityTokenRequestor())
+        public RecordsManagerClient() : this(null, new RecordsManagerCredentials(), new SecurityTokenRequestorWsTrust())
         {
         }
 
 
-        public RecordsManagerClient(string url) : this(url, new RecordsManagerCredentials(), new DefaultSecurityTokenRequestor())
+        public RecordsManagerClient(string url) : this(url, new RecordsManagerCredentials(), new SecurityTokenRequestorWsTrust())
         {
         }
 
 
-        public RecordsManagerClient(string url, RecordsManagerCredentials credentials) : this(url, credentials, new DefaultSecurityTokenRequestor())
+        public RecordsManagerClient(string url, RecordsManagerCredentials credentials) : this(url, credentials, new SecurityTokenRequestorWsTrust())
         {
         }
 
@@ -150,7 +150,7 @@ namespace RecordLion.RecordsManager.Client
 
         public string NewRMUID()
         {
-            return this.Get<string>(GET_NEWRMUID);
+            return this.Get<string>(GET_NEWRMUID.FormatResourceUrl());
         }
 
         #region Record Classes
@@ -165,7 +165,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_RECORDCLASSES_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_RECORDCLASSES_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
         
@@ -180,7 +180,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_RECORDCLASSES, page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_RECORDCLASSES.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty), UriKind.Relative));
             }
         }
         
@@ -195,7 +195,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_RECORDCLASSES_ALL_OPEN, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_RECORDCLASSES_ALL_OPEN.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
         
@@ -210,7 +210,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_RECORDCLASSES_OPEN, page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_RECORDCLASSES_OPEN.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty), UriKind.Relative));
             }
         }        
         
@@ -231,7 +231,7 @@ namespace RecordLion.RecordsManager.Client
 
         public DateTime GetRecordClassesLastEdit()
         {
-            return this.Get<DateTime>(GET_RECORDCLASSES_LASTEDIT);
+            return this.Get<DateTime>(GET_RECORDCLASSES_LASTEDIT.FormatResourceUrl());
         }
         
 
@@ -245,7 +245,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordClass> SearchRecordClasses(string titleOrCode, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RecordClass>>(string.Format(GET_RECORDCLASSES_CONTAINING_TITLEORCODE, titleOrCode, page, pageSize));
+            return this.Get<ClientPagedItems<RecordClass>>(GET_RECORDCLASSES_CONTAINING_TITLEORCODE.FormatResourceUrl(titleOrCode, page, pageSize));
         }
         
 
@@ -259,7 +259,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordClass> GetAllRecordClasses(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RecordClass>>(string.Format(GET_RECORDCLASSES_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<RecordClass>>(GET_RECORDCLASSES_ALL.FormatResourceUrl(page, pageSize));
         }
         
 
@@ -273,7 +273,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordClass> GetRecordClasses(int page, int pageSize, long? parentId = null)
         {
-            return this.Get<ClientPagedItems<RecordClass>>(string.Format(GET_RECORDCLASSES, page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty));
+            return this.Get<ClientPagedItems<RecordClass>>(GET_RECORDCLASSES.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty));
         }
         
 
@@ -287,7 +287,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordClass> GetAllOpenRecordClasses(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RecordClass>>(string.Format(GET_RECORDCLASSES_ALL_OPEN, page, pageSize));
+            return this.Get<ClientPagedItems<RecordClass>>(GET_RECORDCLASSES_ALL_OPEN.FormatResourceUrl(page, pageSize));
         }
         
 
@@ -301,25 +301,25 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordClass> GetOpenRecordClasses(int page, int pageSize, long? parentId = null)
         {
-            return this.Get<ClientPagedItems<RecordClass>>(string.Format(GET_RECORDCLASSES_OPEN, page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty));
+            return this.Get<ClientPagedItems<RecordClass>>(GET_RECORDCLASSES_OPEN.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty));
         }
         
 
         public RecordClass GetRecordClass(long id)
         {
-            return this.Get<RecordClass>(string.Format(GET_RECORDCLASS_WITH_ID, id));
+            return this.Get<RecordClass>(GET_RECORDCLASS_WITH_ID.FormatResourceUrl(id));
         }
         
 
         public RecordClass GetRecordClass(string code)
         {
-            return this.Get<RecordClass>(string.Format(GET_RECORDCLASS_WITH_CODE, code));
+            return this.Get<RecordClass>(GET_RECORDCLASS_WITH_CODE.FormatResourceUrl(code));
         }
         
 
         public RecordClass CreateRecordClass(RecordClass recordClass)
         {
-            return this.Post<RecordClass>(POST_RECORDCLASS, recordClass);
+            return this.Post<RecordClass>(POST_RECORDCLASS.FormatResourceUrl(), recordClass);
         }
 
 
@@ -333,13 +333,13 @@ namespace RecordLion.RecordsManager.Client
 
         public RecordClass UpdateRecordClass(RecordClass recordClass)
         {
-            return this.Put<RecordClass>(PUT_RECORDCLASS, recordClass);
+            return this.Put<RecordClass>(PUT_RECORDCLASS.FormatResourceUrl(), recordClass);
         }
         
 
         public void DeleteRecordClass(long id)
         {
-            this.Delete(string.Format(DELETE_RECORDCLASS_WITH_ID, id));
+            this.Delete(DELETE_RECORDCLASS_WITH_ID.FormatResourceUrl(id));
         }
         
         #endregion
@@ -349,7 +349,7 @@ namespace RecordLion.RecordsManager.Client
 
         public DateTime GetRecordsLastEdit()
         {
-            return this.Get<DateTime>(GET_RECORDS_LASTEDIT);
+            return this.Get<DateTime>(GET_RECORDS_LASTEDIT.FormatResourceUrl());
         }
             
         
@@ -363,7 +363,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_RECORDS_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_RECORDS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
 
@@ -378,7 +378,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_RECORDS_FOR_RECORDCLASS, recordClassId, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_RECORDS_FOR_RECORDCLASS.FormatResourceUrl(recordClassId, page, pageSize), UriKind.Relative));
             }
         }
 
@@ -393,7 +393,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_RECORDS_FOR_CONTAINER, containerId, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_RECORDS_FOR_CONTAINER.FormatResourceUrl(containerId, page, pageSize), UriKind.Relative));
             }
         }
             
@@ -422,7 +422,7 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<Record> SearchRecords(string titleOrUri, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<Record>>(string.Format(GET_RECORDS_CONTAINING_TITLEORURI, titleOrUri, page, pageSize));
+            return this.Get<ClientPagedItems<Record>>(GET_RECORDS_CONTAINING_TITLEORURI.FormatResourceUrl(titleOrUri, page, pageSize));
         }                 
             
         
@@ -436,7 +436,7 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<Record> GetRecords(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<Record>>(string.Format(GET_RECORDS_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<Record>>(GET_RECORDS_ALL.FormatResourceUrl(page, pageSize));
         }
 
 
@@ -450,7 +450,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<Record> GetRecordsForRecordClass(long recordClassId, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<Record>>(string.Format(GET_RECORDS_FOR_RECORDCLASS, recordClassId, page, pageSize));
+            return this.Get<ClientPagedItems<Record>>(GET_RECORDS_FOR_RECORDCLASS.FormatResourceUrl(recordClassId, page, pageSize));
         }
 
 
@@ -464,25 +464,25 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<Record> GetRecordsForContainer(long containerId, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<Record>>(string.Format(GET_RECORDS_FOR_CONTAINER, containerId, page, pageSize));
+            return this.Get<ClientPagedItems<Record>>(GET_RECORDS_FOR_CONTAINER.FormatResourceUrl(containerId, page, pageSize));
         }
             
         
         public Record GetRecord(long id)
         {
-            return this.Get<Record>(string.Format(GET_RECORD_WITH_ID, id));
+            return this.Get<Record>(GET_RECORD_WITH_ID.FormatResourceUrl(id));
         }
             
         
         public Record GetRecordByIdentifier(string identifier)
         {
-            return this.Get<Record>(string.Format(GET_RECORD_WITH_IDENTIFIER, identifier));
+            return this.Get<Record>(GET_RECORD_WITH_IDENTIFIER.FormatResourceUrl(identifier));
         }
             
         
         public Record GetRecordByUri(string uri)
         {
-            return this.Get<Record>(string.Format(GET_RECORD_WITH_URI, uri));
+            return this.Get<Record>(GET_RECORD_WITH_URI.FormatResourceUrl(uri));
         }
             
         
@@ -493,7 +493,7 @@ namespace RecordLion.RecordsManager.Client
                 Record = RecordDeclarationState.Declare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION, uri), declaration);
+            this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
             
         
@@ -504,7 +504,7 @@ namespace RecordLion.RecordsManager.Client
                 Record = RecordDeclarationState.Undeclare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION, uri), declaration);
+            this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
             
         
@@ -515,7 +515,7 @@ namespace RecordLion.RecordsManager.Client
                 Vital = RecordDeclarationState.Declare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION, uri), declaration);
+            this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
             
         
@@ -526,7 +526,7 @@ namespace RecordLion.RecordsManager.Client
                 Vital = RecordDeclarationState.Undeclare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION, uri), declaration);
+            this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
             
         
@@ -537,7 +537,7 @@ namespace RecordLion.RecordsManager.Client
                 Obsolete = RecordDeclarationState.Declare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION, uri), declaration);
+            this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
             
         
@@ -548,7 +548,7 @@ namespace RecordLion.RecordsManager.Client
                 Obsolete = RecordDeclarationState.Undeclare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION, uri), declaration);
+            this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
             
         
@@ -559,7 +559,7 @@ namespace RecordLion.RecordsManager.Client
                 Record = RecordDeclarationState.Declare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_ID, id), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
             
         
@@ -570,7 +570,7 @@ namespace RecordLion.RecordsManager.Client
                 Record = RecordDeclarationState.Undeclare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_ID, id), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
             
         
@@ -581,7 +581,7 @@ namespace RecordLion.RecordsManager.Client
                 Vital = RecordDeclarationState.Declare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_ID, id), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
             
         
@@ -592,7 +592,7 @@ namespace RecordLion.RecordsManager.Client
                 Vital = RecordDeclarationState.Undeclare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_ID, id), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
             
         
@@ -603,7 +603,7 @@ namespace RecordLion.RecordsManager.Client
                 Obsolete = RecordDeclarationState.Declare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_ID, id), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
             
         
@@ -614,7 +614,7 @@ namespace RecordLion.RecordsManager.Client
                 Obsolete = RecordDeclarationState.Undeclare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_ID, id), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
             
         
@@ -625,7 +625,7 @@ namespace RecordLion.RecordsManager.Client
                 Record = RecordDeclarationState.Declare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_IDENTIFIER, identifier), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
             
         
@@ -636,7 +636,7 @@ namespace RecordLion.RecordsManager.Client
                 Record = RecordDeclarationState.Undeclare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_IDENTIFIER, identifier), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
             
         
@@ -647,7 +647,7 @@ namespace RecordLion.RecordsManager.Client
                 Vital = RecordDeclarationState.Declare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_IDENTIFIER, identifier), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
             
         
@@ -658,7 +658,7 @@ namespace RecordLion.RecordsManager.Client
                 Vital = RecordDeclarationState.Undeclare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_IDENTIFIER, identifier), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
             
         
@@ -669,7 +669,7 @@ namespace RecordLion.RecordsManager.Client
                 Obsolete = RecordDeclarationState.Declare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_IDENTIFIER, identifier), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
             
         
@@ -680,7 +680,7 @@ namespace RecordLion.RecordsManager.Client
                 Obsolete = RecordDeclarationState.Undeclare
             };
                 
-            this.Put(string.Format(PUT_RECORD_DECLARATION_WITH_IDENTIFIER, identifier), declaration);
+            this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
             
         #endregion
@@ -698,7 +698,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_CONTAINERS_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_CONTAINERS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
                 
@@ -713,7 +713,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_CONTAINERS, page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_CONTAINERS.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty), UriKind.Relative));
             }
         }
                 
@@ -734,7 +734,7 @@ namespace RecordLion.RecordsManager.Client
             
         public DateTime GetContainerLastEdit()
         {
-            return this.Get<DateTime>(GET_CONTAINERS_LASTEDIT);
+            return this.Get<DateTime>(GET_CONTAINERS_LASTEDIT.FormatResourceUrl());
         }
         
             
@@ -748,7 +748,7 @@ namespace RecordLion.RecordsManager.Client
             
         public IClientPagedItems<Container> SearchContainers(string title, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<Container>>(string.Format(GET_CONTAINERS_CONTAINING_TITLE, title, page, pageSize));
+            return this.Get<ClientPagedItems<Container>>(GET_CONTAINERS_CONTAINING_TITLE.FormatResourceUrl(title, page, pageSize));
         }
         
             
@@ -762,7 +762,7 @@ namespace RecordLion.RecordsManager.Client
             
         public IClientPagedItems<Container> GetAllContainers(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<Container>>(string.Format(GET_CONTAINERS_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<Container>>(GET_CONTAINERS_ALL.FormatResourceUrl(page, pageSize));
         }
         
             
@@ -776,37 +776,37 @@ namespace RecordLion.RecordsManager.Client
             
         public IClientPagedItems<Container> GetContainers(int page, int pageSize, long? parentId = null)
         {
-            return this.Get<ClientPagedItems<Container>>(string.Format(GET_CONTAINERS, page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty));
+            return this.Get<ClientPagedItems<Container>>(GET_CONTAINERS.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty));
         }
         
             
         public Container GetContainer(long id)
         {
-            return this.Get<Container>(string.Format(GET_CONTAINER_WITH_ID, id));
+            return this.Get<Container>(GET_CONTAINER_WITH_ID.FormatResourceUrl(id));
         }
         
             
         public Container GetContainer(string barcode)
         {
-            return this.Get<Container>(string.Format(GET_CONTAINER_WITH_BARCODE, barcode));
+            return this.Get<Container>(GET_CONTAINER_WITH_BARCODE.FormatResourceUrl(barcode));
         }
         
             
         public Container CreateContainer(Container container)
         {
-            return this.Post<Container>(POST_CONTAINER, container);
+            return this.Post<Container>(POST_CONTAINER.FormatResourceUrl(), container);
         }
         
             
         public Container UpdateContainer(Container container)
         {
-            return this.Put<Container>(PUT_CONTAINER, container);
+            return this.Put<Container>(PUT_CONTAINER.FormatResourceUrl(), container);
         }
         
             
         public void DeleteContainer(long id)
         {
-            this.Delete(string.Format(DELETE_CONTAINER_WITH_ID, id));
+            this.Delete(DELETE_CONTAINER_WITH_ID.FormatResourceUrl(id));
         }
         
         #endregion
@@ -816,13 +816,13 @@ namespace RecordLion.RecordsManager.Client
         
         public string GenerateBarcode(long barcodeSchemeId)
         {
-            return this.Get<string>(string.Format(GET_BARCODES_GENERATE, barcodeSchemeId));
+            return this.Get<string>(GET_BARCODES_GENERATE.FormatResourceUrl(barcodeSchemeId));
         }
         
         
         public DateTime GetBarcodeSchemesLastEdit()
         {
-            return this.Get<DateTime>(GET_BARCODES_LASTEDIT);
+            return this.Get<DateTime>(GET_BARCODES_LASTEDIT.FormatResourceUrl());
         }
         
         
@@ -836,7 +836,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<BarcodeScheme> SearchBarcodeSchemes(string title, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<BarcodeScheme>>(string.Format(GET_BARCODES_WITH_TITLE, title, page, pageSize));
+            return this.Get<ClientPagedItems<BarcodeScheme>>(GET_BARCODES_WITH_TITLE.FormatResourceUrl(title, page, pageSize));
         }             
         
         
@@ -850,31 +850,31 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<BarcodeScheme> GetBarcodeSchemes(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<BarcodeScheme>>(string.Format(GET_BARCODES_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<BarcodeScheme>>(GET_BARCODES_ALL.FormatResourceUrl(page, pageSize));
         }
         
         
         public BarcodeScheme GetBarcodeScheme(long id)
         {
-            return this.Get<BarcodeScheme>(string.Format(GET_BARCODES_WITH_ID, id));
+            return this.Get<BarcodeScheme>(GET_BARCODES_WITH_ID.FormatResourceUrl(id));
         }
         
         
         public BarcodeScheme CreateBarcodeScheme(BarcodeScheme scheme)
         {
-            return this.Post<BarcodeScheme>(POST_BARCODE, scheme);
+            return this.Post<BarcodeScheme>(POST_BARCODE.FormatResourceUrl(), scheme);
         }
         
         
         public BarcodeScheme UpdateBarcodeScheme(BarcodeScheme scheme)
         {
-            return this.Put<BarcodeScheme>(PUT_BARCODE, scheme);
+            return this.Put<BarcodeScheme>(PUT_BARCODE.FormatResourceUrl(), scheme);
         }
         
         
         public void DeleteBarcodeScheme(long id)
         {
-            this.Delete(string.Format(DELETE_BARCODE, id));
+            this.Delete(DELETE_BARCODE.FormatResourceUrl(id));
         }
         
         #endregion
@@ -884,13 +884,13 @@ namespace RecordLion.RecordsManager.Client
 
         public IEnumerable<Record> ProcessRecordization(IEnumerable<Recordize> recordizers)
         {
-            return this.Post<IEnumerable<Record>>(POST_RECORDIZERS, recordizers.ToArray());
+            return this.Post<IEnumerable<Record>>(POST_RECORDIZERS.FormatResourceUrl(), recordizers.ToArray());
         }
 
         
         public void DeleteRecordization(string recordizedUrl, bool deleteAll)
         {
-            this.Delete(string.Format(DELETE_RECORDIZERS, recordizedUrl, deleteAll));
+            this.Delete(DELETE_RECORDIZERS.FormatResourceUrl(recordizedUrl, deleteAll));
         }
 
         #endregion
@@ -908,7 +908,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_TRIGGERS_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_TRIGGERS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
         
@@ -929,7 +929,7 @@ namespace RecordLion.RecordsManager.Client
 
         public DateTime GetTriggersLastEdit()
         {
-            return this.Get<DateTime>(GET_TRIGGERS_LASTEDIT);
+            return this.Get<DateTime>(GET_TRIGGERS_LASTEDIT.FormatResourceUrl());
         }
 
 
@@ -943,7 +943,7 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<RetentionTrigger> SearchTriggers(string title, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RetentionTrigger>>(string.Format(GET_TRIGGERS_CONTAINING_TITLE, title, page, pageSize));
+            return this.Get<ClientPagedItems<RetentionTrigger>>(GET_TRIGGERS_CONTAINING_TITLE.FormatResourceUrl(title, page, pageSize));
         }
 
 
@@ -957,31 +957,31 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<RetentionTrigger> GetTriggers(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RetentionTrigger>>(string.Format(GET_TRIGGERS_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<RetentionTrigger>>(GET_TRIGGERS_ALL.FormatResourceUrl(page, pageSize));
         }
 
 
         public RetentionTrigger GetTrigger(long id)
         {
-            return this.Get<RetentionTrigger>(string.Format(GET_TRIGGER_WITH_ID, id));
+            return this.Get<RetentionTrigger>(GET_TRIGGER_WITH_ID.FormatResourceUrl(id));
         }
 
 
         public RetentionTrigger CreateTrigger(RetentionTrigger trigger)
         {
-            return this.Post<RetentionTrigger>(POST_TRIGGER, trigger);
+            return this.Post<RetentionTrigger>(POST_TRIGGER.FormatResourceUrl(), trigger);
         }
 
 
         public RetentionTrigger UpdateTrigger(RetentionTrigger trigger)
         {
-            return this.Put<RetentionTrigger>(PUT_TRIGGER, trigger);
+            return this.Put<RetentionTrigger>(PUT_TRIGGER.FormatResourceUrl(), trigger);
         }
 
 
         public void DeleteTrigger(long id)
         {
-            this.Delete(string.Format(DELETE_TRIGGER_WITH_ID, id));
+            this.Delete(DELETE_TRIGGER_WITH_ID.FormatResourceUrl(id));
         }
 
         #endregion
@@ -999,7 +999,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_RETENTIONS_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_RETENTIONS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
         
@@ -1020,7 +1020,7 @@ namespace RecordLion.RecordsManager.Client
 
         public DateTime GetRetentionsLastEdit()
         {
-            return this.Get<DateTime>(GET_RETENTIONS_LASTEDIT);
+            return this.Get<DateTime>(GET_RETENTIONS_LASTEDIT.FormatResourceUrl());
         }
         
 
@@ -1034,7 +1034,7 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<Retention> GetRetentions(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<Retention>>(string.Format(GET_RETENTIONS_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<Retention>>(GET_RETENTIONS_ALL.FormatResourceUrl(page, pageSize));
         }
         
 
@@ -1048,31 +1048,31 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<Retention> SearchRetentions(string titleOrAuthority, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<Retention>>(string.Format(GET_RETENTIONS_CONTAINING_TITLEORAUTHORITY, titleOrAuthority, page, pageSize));
+            return this.Get<ClientPagedItems<Retention>>(GET_RETENTIONS_CONTAINING_TITLEORAUTHORITY.FormatResourceUrl(titleOrAuthority, page, pageSize));
         }
         
 
         public Retention GetRetention(long id)
         {
-            return this.Get<Retention>(string.Format(GET_RETENTION_WITH_ID, id));
+            return this.Get<Retention>(GET_RETENTION_WITH_ID.FormatResourceUrl(id));
         }
 
 
         public Retention CreateRetention(Retention retention)
         {
-            return this.Post<Retention>(POST_RETENTION, retention);
+            return this.Post<Retention>(POST_RETENTION.FormatResourceUrl(), retention);
         }
 
 
         public Retention UpdateRetention(Retention retention)
         {
-            return this.Put<Retention>(PUT_RETENTION, retention);
+            return this.Put<Retention>(PUT_RETENTION.FormatResourceUrl(), retention);
         }
         
 
         public void DeleteRetention(long id)
         {
-            this.Delete(string.Format(DELETE_RETENTION_WITH_ID, id));
+            this.Delete(DELETE_RETENTION_WITH_ID.FormatResourceUrl(id));
         }
         
         #endregion
@@ -1090,7 +1090,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_LIFECYCLES_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_LIFECYCLES_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
 
@@ -1111,7 +1111,7 @@ namespace RecordLion.RecordsManager.Client
         
         public DateTime GetLifecyclesLastEdit()
         {
-            return this.Get<DateTime>(GET_LIFECYCLES_LASTEDIT);
+            return this.Get<DateTime>(GET_LIFECYCLES_LASTEDIT.FormatResourceUrl());
         }
             
         
@@ -1125,7 +1125,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<Lifecycle> SearchLifecycles(string title, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<Lifecycle>>(string.Format(GET_LIFECYCLES_CONTAINING_TITLE, title, page, pageSize));
+            return this.Get<ClientPagedItems<Lifecycle>>(GET_LIFECYCLES_CONTAINING_TITLE.FormatResourceUrl(title, page, pageSize));
         }
             
         
@@ -1139,37 +1139,37 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<Lifecycle> GetLifecycles(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<Lifecycle>>(string.Format(GET_LIFECYCLES_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<Lifecycle>>(GET_LIFECYCLES_ALL.FormatResourceUrl(page, pageSize));
         }
             
         
         public Lifecycle GetLifecycle(long id)
         {
-            return this.Get<Lifecycle>(string.Format(GET_LIFECYCLE_WITH_ID, id));
+            return this.Get<Lifecycle>(GET_LIFECYCLE_WITH_ID.FormatResourceUrl(id));
         }
 
 
         public List<LifecyclePhaseSummary> GetLifecyclesSummary(long id)
         {
-            return this.Get<List<LifecyclePhaseSummary>>(string.Format(GET_LIFECYCLE_SUMMARY_WITH_ID, id));
+            return this.Get<List<LifecyclePhaseSummary>>(GET_LIFECYCLE_SUMMARY_WITH_ID.FormatResourceUrl(id));
         }
             
         
         public Lifecycle CreateLifecycle(Lifecycle lifecycle)
         {
-            return this.Post<Lifecycle>(POST_LIFECYCLE, lifecycle);
+            return this.Post<Lifecycle>(POST_LIFECYCLE.FormatResourceUrl(), lifecycle);
         }
             
         
         public Lifecycle UpdateLifecycle(Lifecycle lifecycle)
         {
-            return this.Put<Lifecycle>(PUT_LIFECYCLE, lifecycle);
+            return this.Put<Lifecycle>(PUT_LIFECYCLE.FormatResourceUrl(), lifecycle);
         }
             
         
         public void DeleteLifecycle(long id)
         {
-            this.Delete(string.Format(DELETE_LIFECYCLE_WITH_ID, id));
+            this.Delete(DELETE_LIFECYCLE_WITH_ID.FormatResourceUrl(id));
         }
             
         #endregion
@@ -1187,7 +1187,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_RECORDCLASSLIFECYCLES_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_RECORDCLASSLIFECYCLES_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
 
@@ -1208,7 +1208,7 @@ namespace RecordLion.RecordsManager.Client
             
         public DateTime GetRecordClassLifecyclesLastEdit()
         {
-            return this.Get<DateTime>(GET_RECORDCLASSLIFECYCLES_LASTEDIT);
+            return this.Get<DateTime>(GET_RECORDCLASSLIFECYCLES_LASTEDIT.FormatResourceUrl());
         }
         
             
@@ -1222,7 +1222,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordClassLifecycle> SearchRecordClassLifecycles(string title, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RecordClassLifecycle>>(string.Format(GET_RECORDCLASSLIFECYCLES_RECORDCLASSTITLEORLIFECYCLETITLE, title, page, pageSize));
+            return this.Get<ClientPagedItems<RecordClassLifecycle>>(GET_RECORDCLASSLIFECYCLES_RECORDCLASSTITLEORLIFECYCLETITLE.FormatResourceUrl(title, page, pageSize));
         }
 
             
@@ -1236,31 +1236,36 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordClassLifecycle> GetRecordClassLifecycles(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RecordClassLifecycle>>(string.Format(GET_RECORDCLASSLIFECYCLES_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<RecordClassLifecycle>>(GET_RECORDCLASSLIFECYCLES_ALL.FormatResourceUrl(page, pageSize));
         }
 
             
         public RecordClassLifecycle GetRecordClassLifecycle(long id)
         {
-            return this.Get<RecordClassLifecycle>(string.Format(GET_RECORDCLASSLIFECYCLE_WITH_ID, id));
+            return this.Get<RecordClassLifecycle>(GET_RECORDCLASSLIFECYCLE_WITH_ID.FormatResourceUrl(id));
         }
-        
-            
+
+        public RecordClassLifecycle GetRecordClassLifecycleForRecordClass(long recordClassId)
+        {
+            return this.Get<RecordClassLifecycle>(GET_RECORDCLASSLIFECYCLE_WITH_RECORDCLASSID.FormatResourceUrl(recordClassId));
+        }
+
+
         public RecordClassLifecycle CreateRecordClassLifecycle(RecordClassLifecycle lifecycle)
         {
-            return this.Post<RecordClassLifecycle>(POST_RECORDCLASSLIFECYCLE, lifecycle);
+            return this.Post<RecordClassLifecycle>(POST_RECORDCLASSLIFECYCLE.FormatResourceUrl(), lifecycle);
         }
         
             
         public RecordClassLifecycle UpdateRecordClassLifecycle(RecordClassLifecycle lifecycle)
         {
-            return this.Put<RecordClassLifecycle>(PUT_RECORDCLASSLIFECYCLE, lifecycle);
+            return this.Put<RecordClassLifecycle>(PUT_RECORDCLASSLIFECYCLE.FormatResourceUrl(), lifecycle);
         }
         
             
         public void DeleteRecordClassLifecycle(long id)
         {
-            this.Delete(string.Format(DELETE_RECORDCLASSLIFECYCLE_WITH_ID, id));
+            this.Delete(DELETE_RECORDCLASSLIFECYCLE_WITH_ID.FormatResourceUrl(id));
         }
         
         #endregion
@@ -1278,7 +1283,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_EVENTOCCURRENCES_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_EVENTOCCURRENCES_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
         
@@ -1299,7 +1304,7 @@ namespace RecordLion.RecordsManager.Client
 
         public DateTime GetEventOccurrencesLastEdit()
         {
-            return this.Get<DateTime>(GET_EVENTOCCURRENCES_LASTEDIT);
+            return this.Get<DateTime>(GET_EVENTOCCURRENCES_LASTEDIT.FormatResourceUrl());
         }
         
         
@@ -1313,7 +1318,7 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<EventOccurrence> SearchEventOccurrences(string eventTitle, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<EventOccurrence>>(string.Format(GET_EVENTOCCURRENCES_CONTAINING_EVENTTITLE, eventTitle, page, pageSize));
+            return this.Get<ClientPagedItems<EventOccurrence>>(GET_EVENTOCCURRENCES_CONTAINING_EVENTTITLE.FormatResourceUrl(eventTitle, page, pageSize));
         }
             
 
@@ -1327,25 +1332,25 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<EventOccurrence> GetEventOccurrences(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<EventOccurrence>>(string.Format(GET_EVENTOCCURRENCES_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<EventOccurrence>>(GET_EVENTOCCURRENCES_ALL.FormatResourceUrl(page, pageSize));
         }
             
 
         public EventOccurrence GetEventOccurrences(long id)
         {
-            return this.Get<EventOccurrence>(string.Format(GET_EVENTOCCURRENCE_WITH_ID, id));
+            return this.Get<EventOccurrence>(GET_EVENTOCCURRENCE_WITH_ID.FormatResourceUrl(id));
         }
         
         
         public EventOccurrence CreateEventOccurrence(EventOccurrence eventOccurrence)
         {
-            return this.Post<EventOccurrence>(POST_EVENTOCCURRENCE, eventOccurrence);
+            return this.Post<EventOccurrence>(POST_EVENTOCCURRENCE.FormatResourceUrl(), eventOccurrence);
         }
         
         
         public void DeleteEventOccurrence(long id)
         {
-            this.Delete(string.Format(DELETE_EVENTOCCURRENCE_WITH_ID, id));
+            this.Delete(DELETE_EVENTOCCURRENCE_WITH_ID.FormatResourceUrl(id));
         }
         
         #endregion        
@@ -1363,7 +1368,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_AUDIT_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_AUDIT_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
             
@@ -1384,7 +1389,7 @@ namespace RecordLion.RecordsManager.Client
             
         public DateTime GetAuditsLastEdit()
         {
-            return this.Get<DateTime>(GET_AUDIT_LASTEDIT);
+            return this.Get<DateTime>(GET_AUDIT_LASTEDIT.FormatResourceUrl());
         }
 
         
@@ -1398,7 +1403,7 @@ namespace RecordLion.RecordsManager.Client
             
         public IClientPagedItems<AuditEntry> SearchAudits(DateTime rangeStart, DateTime rangeEnd, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<AuditEntry>>(string.Format(GET_AUDIT_IN_RANGE, rangeStart, rangeEnd, page, pageSize));
+            return this.Get<ClientPagedItems<AuditEntry>>(GET_AUDIT_IN_RANGE.FormatResourceUrl(rangeStart, rangeEnd, page, pageSize));
         }
         
             
@@ -1412,7 +1417,7 @@ namespace RecordLion.RecordsManager.Client
             
         public IClientPagedItems<AuditEntry> GetAudits(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<AuditEntry>>(string.Format(GET_AUDIT_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<AuditEntry>>(GET_AUDIT_ALL.FormatResourceUrl(page, pageSize));
         }
         
             
@@ -1426,7 +1431,7 @@ namespace RecordLion.RecordsManager.Client
             
         public IClientPagedItems<AuditEntry> GetAudits(AuditTarget target, long targetId, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<AuditEntry>>(string.Format(GET_AUDIT_FOR_TARGET, target, targetId, page, pageSize));
+            return this.Get<ClientPagedItems<AuditEntry>>(GET_AUDIT_FOR_TARGET.FormatResourceUrl(target, targetId, page, pageSize));
         }
         
             
@@ -1440,13 +1445,13 @@ namespace RecordLion.RecordsManager.Client
             
         public IClientPagedItems<AuditEntry> GetAuditsForRecord(string recordUri, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<AuditEntry>>(string.Format(GET_AUDIT_FOR_RECORDURI, recordUri, page, pageSize));
+            return this.Get<ClientPagedItems<AuditEntry>>(GET_AUDIT_FOR_RECORDURI.FormatResourceUrl(recordUri, page, pageSize));
         }
         
             
         public AuditEntry CreateAudit(NewAuditEntry auditEntry)
         {
-            return this.Post<AuditEntry>(POST_AUDIT, auditEntry);
+            return this.Post<AuditEntry>(POST_AUDIT.FormatResourceUrl(), auditEntry);
         }
 
         #endregion
@@ -1462,7 +1467,7 @@ namespace RecordLion.RecordsManager.Client
 
         public HeartbeatResult Heartbeat(Heartbeat heartbeat, bool supportsFailover)
         {
-            return this.Post<HeartbeatResult>(string.Format(POST_HEARTBEAT, supportsFailover), heartbeat);
+            return this.Post<HeartbeatResult>(POST_HEARTBEAT.FormatResourceUrl(supportsFailover), heartbeat);
         }
         
         #endregion
@@ -1480,7 +1485,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_LEGALCASES_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_LEGALCASES_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
         
@@ -1495,7 +1500,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_LEGALCASES_OPEN, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_LEGALCASES_OPEN.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
         
@@ -1516,7 +1521,7 @@ namespace RecordLion.RecordsManager.Client
         
         public DateTime GetLegalCasesLastEdit()
         {
-            return this.Get<DateTime>(GET_LEGALCASES_LASTEDIT);
+            return this.Get<DateTime>(GET_LEGALCASES_LASTEDIT.FormatResourceUrl());
         }
         
 
@@ -1530,7 +1535,7 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<LegalCase> SearchLegalCases(string titleOrNumber, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<LegalCase>>(string.Format(GET_LEGALCASES_CONTAINING_TITLEORNUMBER, titleOrNumber, page, pageSize));
+            return this.Get<ClientPagedItems<LegalCase>>(GET_LEGALCASES_CONTAINING_TITLEORNUMBER.FormatResourceUrl(titleOrNumber, page, pageSize));
         }
 
         
@@ -1544,7 +1549,7 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<LegalCase> GetLegalCases(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<LegalCase>>(string.Format(GET_LEGALCASES_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<LegalCase>>(GET_LEGALCASES_ALL.FormatResourceUrl(page, pageSize));
         }
 
         
@@ -1558,31 +1563,31 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<LegalCase> GetOpenLegalCases(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<LegalCase>>(string.Format(GET_LEGALCASES_OPEN, page, pageSize));
+            return this.Get<ClientPagedItems<LegalCase>>(GET_LEGALCASES_OPEN.FormatResourceUrl(page, pageSize));
         }
 
         
         public LegalCase GetLegalCase(long id)
         {
-            return this.Get<LegalCase>(string.Format(GET_LEGALCASES_WITH_ID, id));
+            return this.Get<LegalCase>(GET_LEGALCASES_WITH_ID.FormatResourceUrl(id));
         }
         
 
         public LegalCase CreateLegalCase(LegalCase legalCase)
         {
-            return this.Post<LegalCase>(POST_LEGALCASES, legalCase);
+            return this.Post<LegalCase>(POST_LEGALCASES.FormatResourceUrl(), legalCase);
         }
         
 
         public LegalCase UpdateLegalCase(LegalCase legalCase)
         {
-            return this.Put<LegalCase>(PUT_LEGALCASES, legalCase);
+            return this.Put<LegalCase>(PUT_LEGALCASES.FormatResourceUrl(), legalCase);
         }
         
 
         public void DeleteLegalCase(long id)
         {
-            this.Delete(string.Format(DELETE_LEGALCASES_WITH_ID, id));
+            this.Delete(DELETE_LEGALCASES_WITH_ID.FormatResourceUrl(id));
         }
         
         #endregion
@@ -1600,7 +1605,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_LEGALHOLDS_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_LEGALHOLDS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
 
@@ -1615,7 +1620,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_LEGALHOLDS_OPEN, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_LEGALHOLDS_OPEN.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
 
@@ -1644,7 +1649,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<LegalHold> GetLegalHolds(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<LegalHold>>(string.Format(GET_LEGALHOLDS_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<LegalHold>>(GET_LEGALHOLDS_ALL.FormatResourceUrl(page, pageSize));
         }
 
 
@@ -1658,7 +1663,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<LegalHold> GetOpenLegalHolds(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<LegalHold>>(string.Format(GET_LEGALHOLDS_OPEN, page, pageSize));
+            return this.Get<ClientPagedItems<LegalHold>>(GET_LEGALHOLDS_OPEN.FormatResourceUrl(page, pageSize));
         }
 
 
@@ -1672,7 +1677,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<LegalHold> SearchLegalHolds(string uri, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<LegalHold>>(string.Format(GET_LEGALHOLDS_CONTAINING_URI, uri, page, pageSize));
+            return this.Get<ClientPagedItems<LegalHold>>(GET_LEGALHOLDS_CONTAINING_URI.FormatResourceUrl(uri, page, pageSize));
         }
 
 
@@ -1686,7 +1691,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<LegalHold> SearchOpenLegalHolds(string uri, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<LegalHold>>(string.Format(GET_LEGALHOLDS_OPEN_CONTAINING_URI, uri, page, pageSize));
+            return this.Get<ClientPagedItems<LegalHold>>(GET_LEGALHOLDS_OPEN_CONTAINING_URI.FormatResourceUrl(uri, page, pageSize));
         }
 
 
@@ -1700,37 +1705,37 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<LegalHold> SearchLegalHolds(long legalCaseId, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<LegalHold>>(string.Format(GET_LEGALHOLDS_CONTAINING_LEGALCASEID, legalCaseId, page, pageSize));
+            return this.Get<ClientPagedItems<LegalHold>>(GET_LEGALHOLDS_CONTAINING_LEGALCASEID.FormatResourceUrl(legalCaseId, page, pageSize));
         }
 
 
         public LegalHold GetLegalHoldById(long id)
         {
-            return this.Get<LegalHold>(string.Format(GET_LEGALHOLD_WITH_ID, id));
+            return this.Get<LegalHold>(GET_LEGALHOLD_WITH_ID.FormatResourceUrl(id));
         }
             
         
         public LegalHold CreateLegalHold(LegalHold legalHold)
         {
-            return this.Post<LegalHold>(POST_LEGALHOLD, legalHold);
+            return this.Post<LegalHold>(POST_LEGALHOLD.FormatResourceUrl(), legalHold);
         }
             
         
         public LegalHold UpdateLegalHold(LegalHold legalHold)
         {
-            return this.Put<LegalHold>(PUT_LEGALHOLD, legalHold);
+            return this.Put<LegalHold>(PUT_LEGALHOLD.FormatResourceUrl(), legalHold);
         }
             
         
         public void DeleteLegalHold(long legalCaseId, string uri)
         {
-            this.Delete(string.Format(DELETE_LEGALHOLD_FOR_CASE_WITH_URI, legalCaseId, uri));
+            this.Delete(DELETE_LEGALHOLD_FOR_CASE_WITH_URI.FormatResourceUrl(legalCaseId, uri));
         }
             
         
         public void DeleteLegalHold(long id)
         {
-            this.Delete(string.Format(DELETE_LEGALHOLD_WITH_ID, id));
+            this.Delete(DELETE_LEGALHOLD_WITH_ID.FormatResourceUrl(id));
         }
             
         #endregion
@@ -1740,7 +1745,7 @@ namespace RecordLion.RecordsManager.Client
         
         public DateTime GetActionItemsLastEdit()
         {
-            return this.Get<DateTime>(GET_ACTIONITEMS_LASTEDIT);
+            return this.Get<DateTime>(GET_ACTIONITEMS_LASTEDIT.FormatResourceUrl());
         }
         
         
@@ -1760,25 +1765,25 @@ namespace RecordLion.RecordsManager.Client
 
         public ActionItem GetActionItem(long id)
         {
-            return this.Get<ActionItem>(string.Format(GET_ACTIONITEM_WITH_ID, id));
+            return this.Get<ActionItem>(GET_ACTIONITEM_WITH_ID.FormatResourceUrl(id));
         }
 
             
         public ActionItem GetActionItemForRecord(long recordId)
         {
-            return this.Get<ActionItem>(string.Format(GET_ACTIONITEM_FOR_RECORDID, recordId));
+            return this.Get<ActionItem>(GET_ACTIONITEM_FOR_RECORDID.FormatResourceUrl(recordId));
         }
         
             
         public ActionItem GetActionItemForRecord(string identifier)
         {
-            return this.Get<ActionItem>(string.Format(GET_ACTIONITEM_FOR_RECORDIDENTIFIER, identifier));
+            return this.Get<ActionItem>(GET_ACTIONITEM_FOR_RECORDIDENTIFIER.FormatResourceUrl(identifier));
         }
         
             
         public ActionItem UpdateActionItem(ActionItem actionItem)
         {
-            return this.Put<ActionItem>(PUT_ACTIONITEM, actionItem);
+            return this.Put<ActionItem>(PUT_ACTIONITEM.FormatResourceUrl(), actionItem);
         }
         
         #region Pending Action Items
@@ -1793,7 +1798,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_PENDING_ACTIONITEMS_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_PENDING_ACTIONITEMS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
 
@@ -1808,7 +1813,7 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<ActionItem> SearchPendingActionItemsByTitleOrUri(string recordTitleOrUri, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<ActionItem>>(string.Format(GET_PENDING_ACTIONITEMS_CONTAINING_RECORDTITLEORURI, recordTitleOrUri, page, pageSize));
+            return this.Get<ClientPagedItems<ActionItem>>(GET_PENDING_ACTIONITEMS_CONTAINING_RECORDTITLEORURI.FormatResourceUrl(recordTitleOrUri, page, pageSize));
         }
 
 
@@ -1822,7 +1827,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<ActionItem> SearchPendingActionItemsByUri(string recordUri, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<ActionItem>>(string.Format(GET_PENDING_ACTIONITEMS_CONTAINING_RECORDURI, recordUri, page, pageSize));
+            return this.Get<ClientPagedItems<ActionItem>>(GET_PENDING_ACTIONITEMS_CONTAINING_RECORDURI.FormatResourceUrl(recordUri, page, pageSize));
         }
 
 
@@ -1836,7 +1841,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<ActionItem> SearchPendingSystemActionItemsByUri(string recordUri, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<ActionItem>>(string.Format(GET_PENDING_SYSTEM_ACTIONITEMS_CONTAINING_RECORDURI, recordUri, page, pageSize));
+            return this.Get<ClientPagedItems<ActionItem>>(GET_PENDING_SYSTEM_ACTIONITEMS_CONTAINING_RECORDURI.FormatResourceUrl(recordUri, page, pageSize));
         }
 
         
@@ -1850,25 +1855,25 @@ namespace RecordLion.RecordsManager.Client
         
         public IClientPagedItems<ActionItem> GetPendingActionItems(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<ActionItem>>(string.Format(GET_PENDING_ACTIONITEMS_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<ActionItem>>(GET_PENDING_ACTIONITEMS_ALL.FormatResourceUrl(page, pageSize));
         }
             
         
         public ActionItem UpdatePendingActionItemCompleted(long id)
         {
-            return this.Put<ActionItem>(PUT_PENDING_ACTIONITEM_COMPLETED, id);
+            return this.Put<ActionItem>(PUT_PENDING_ACTIONITEM_COMPLETED.FormatResourceUrl(id), id);
         }
             
 
         public ActionItem UpdatePendingActionItemFailed(long id)
         {
-            return this.Put<ActionItem>(PUT_PENDING_ACTIONITEM_FAILED, id);
+            return this.Put<ActionItem>(PUT_PENDING_ACTIONITEM_FAILED.FormatResourceUrl(id), id);
         }
         
         
         public ActionItem UpdatePendingActionItemUnsupported(long id)
         {
-            return this.Put<ActionItem>(PUT_PENDING_ACTIONITEM_UNSUPPORTED, id);
+            return this.Put<ActionItem>(PUT_PENDING_ACTIONITEM_UNSUPPORTED.FormatResourceUrl(id), id);
         }
         
         #endregion
@@ -1886,7 +1891,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_INBOX_ACTIONITEMS_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_INBOX_ACTIONITEMS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
 
@@ -1914,7 +1919,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<InboxActionItem> SearchInboxActionItems(string title, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<InboxActionItem>>(string.Format(GET_INBOX_ACTIONITEMS_CONTAINING_TITLE, title, page, pageSize));
+            return this.Get<ClientPagedItems<InboxActionItem>>(GET_INBOX_ACTIONITEMS_CONTAINING_TITLE.FormatResourceUrl(title, page, pageSize));
         }
 
 
@@ -1928,7 +1933,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<InboxActionItem> GetInboxActionItems(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<InboxActionItem>>(string.Format(GET_INBOX_ACTIONITEMS_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<InboxActionItem>>(GET_INBOX_ACTIONITEMS_ALL.FormatResourceUrl(page, pageSize));
         }
 
         public IClientPagedItems<ActionItem> GetInboxActionItemsForCase(InboxActionItem caseItem, int page, int pageSize)
@@ -1936,48 +1941,48 @@ namespace RecordLion.RecordsManager.Client
             if (!caseItem.IsCaseFile)
                 return null;
 
-            return this.Get<ClientPagedItems<ActionItem>>(string.Format(GET_INBOX_ACTIONITEMS_CASE, caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported, page, pageSize));
+            return this.Get<ClientPagedItems<ActionItem>>(GET_INBOX_ACTIONITEMS_CASE.FormatResourceUrl(caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported, page, pageSize));
         }
             
         public void UpdateInboxActionItemApprove(long id)
         {
-            this.Put(PUT_INBOX_ACTIONITEM_APPROVE, id);
+            this.Put(PUT_INBOX_ACTIONITEM_APPROVE.FormatResourceUrl(id), id);
         }
 
 
         public void UpdateInboxActionItemDismiss(long id)
         {
-            this.Put(PUT_INBOX_ACTIONITEM_DISMISS, id);
+            this.Put(PUT_INBOX_ACTIONITEM_DISMISS.FormatResourceUrl(id), id);
         }
 
 
         public void UpdateInboxActionItemRetry(long id)
         {
-            this.Put(PUT_INBOX_ACTIONITEM_RETRY, id);
+            this.Put(PUT_INBOX_ACTIONITEM_RETRY.FormatResourceUrl(id), id);
         }
 
 
         public void UpdateInboxActionItemCompleted(long id)
         {
-            this.Put(PUT_INBOX_ACTIONITEM_COMPLETED, id);
+            this.Put(PUT_INBOX_ACTIONITEM_COMPLETED.FormatResourceUrl(id), id);
         }
 
 
         public void UpdateInboxCaseApprove(InboxActionItem caseItem)
         {
-            this.Put(string.Format(PUT_INBOX_ACTIONITEMS_APPROVE_CASE, caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported), null);
+            this.Put(PUT_INBOX_ACTIONITEMS_APPROVE_CASE.FormatResourceUrl(caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported), null);
         }
 
 
         public void UpdateInboxCaseDismiss(InboxActionItem caseItem)
         {
-            this.Put(string.Format(PUT_INBOX_ACTIONITEMS_DISMISS_CASE, caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported), null);
+            this.Put(PUT_INBOX_ACTIONITEMS_DISMISS_CASE.FormatResourceUrl(caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported), null);
         }
 
 
         public void UpdateInboxCaseRetry(InboxActionItem caseItem)
         {
-            this.Put(string.Format(PUT_INBOX_ACTIONITEMS_RETRY_CASE, caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported), null);
+            this.Put(PUT_INBOX_ACTIONITEMS_RETRY_CASE.FormatResourceUrl(caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported), null);
         }
 
 
@@ -1998,7 +2003,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_RECORDREQUESTS_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_RECORDREQUESTS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
 
@@ -2019,7 +2024,7 @@ namespace RecordLion.RecordsManager.Client
 
         public DateTime GetRecordRequestsLastEdit()
         {
-            return this.Get<DateTime>(GET_RECORDREQUESTS_LASTEDIT);
+            return this.Get<DateTime>(GET_RECORDREQUESTS_LASTEDIT.FormatResourceUrl());
         }
 
 
@@ -2033,7 +2038,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordRequest> GetRecordRequests(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RecordRequest>>(string.Format(GET_RECORDREQUESTS_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<RecordRequest>>(GET_RECORDREQUESTS_ALL.FormatResourceUrl(page, pageSize));
         }
 
 
@@ -2047,31 +2052,31 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordRequest> SearchRecordRequests(string title, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RecordRequest>>(string.Format(GET_RECORDREQUESTS_CONTAINING_TITLE, title, page, pageSize));
+            return this.Get<ClientPagedItems<RecordRequest>>(GET_RECORDREQUESTS_CONTAINING_TITLE.FormatResourceUrl(title, page, pageSize));
         }
 
 
         public RecordRequest GetRecordRequest(long id)
         {
-            return this.Get<RecordRequest>(string.Format(GET_RECORDREQUEST_WITH_ID, id));
+            return this.Get<RecordRequest>(GET_RECORDREQUEST_WITH_ID.FormatResourceUrl(id));
         }
 
 
         public RecordRequest CreateRecordRequest(RecordRequest request)
         {
-            return this.Post<RecordRequest>(POST_RECORDREQUEST, request);
+            return this.Post<RecordRequest>(POST_RECORDREQUEST.FormatResourceUrl(), request);
         }
 
 
         public RecordRequest UpdateRecordRequest(RecordRequest request)
         {
-            return this.Put<RecordRequest>(PUT_RECORDREQUEST, request);
+            return this.Put<RecordRequest>(PUT_RECORDREQUEST.FormatResourceUrl(), request);
         }
 
 
         public void DeleteRecordRequest(long id)
         {
-            this.Delete(string.Format(DELETE_RECORDREQUEST_WITH_ID, id));
+            this.Delete(DELETE_RECORDREQUEST_WITH_ID.FormatResourceUrl(id));
         }
 
 
@@ -2087,7 +2092,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_INBOX_RECORDREQUESTS_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_INBOX_RECORDREQUESTS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
 
@@ -2102,7 +2107,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordRequest> SearchInboxRecordRequests(string title, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RecordRequest>>(string.Format(GET_INBOX_RECORDREQUESTS_CONTAINING_TITLE, title, page, pageSize));
+            return this.Get<ClientPagedItems<RecordRequest>>(GET_INBOX_RECORDREQUESTS_CONTAINING_TITLE.FormatResourceUrl(title, page, pageSize));
         }
 
 
@@ -2116,24 +2121,24 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<RecordRequest> GetInboxRecordRequests(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<RecordRequest>>(string.Format(GET_INBOX_RECORDREQUESTS_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<RecordRequest>>(GET_INBOX_RECORDREQUESTS_ALL.FormatResourceUrl(page, pageSize));
         }
 
         public RecordRequest GetInboxRecordRequest(long id)
         {
-            return this.Get<RecordRequest>(string.Format(GET_INBOX_RECORDREQUEST_WITH_ID, id));
+            return this.Get<RecordRequest>(GET_INBOX_RECORDREQUEST_WITH_ID.FormatResourceUrl(id));
         }
 
 
         public RecordRequest CloseRecordRequest(long id)
         {
-            return this.Put<RecordRequest>(string.Format(PUT_INBOX_RECORDREQUEST_WITH_ID, id), false);
+            return this.Put<RecordRequest>(PUT_INBOX_RECORDREQUEST_WITH_ID.FormatResourceUrl(id), false);
         }
 
 
         public RecordRequest CloseAndFulfillRecordRequest(long id)
         {
-            return this.Put<RecordRequest>(string.Format(PUT_INBOX_RECORDREQUEST_WITH_ID, id), true);
+            return this.Put<RecordRequest>(PUT_INBOX_RECORDREQUEST_WITH_ID.FormatResourceUrl(id), true);
         }
 
 
@@ -2154,7 +2159,7 @@ namespace RecordLion.RecordsManager.Client
         {
             using (var client = this.GetClient())
             {
-                return client.DownloadString(new Uri(string.Format(GET_MANAGEDPROPERTIES_ALL, page, pageSize), UriKind.Relative));
+                return client.DownloadString(new Uri(GET_MANAGEDPROPERTIES_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
 
@@ -2175,7 +2180,7 @@ namespace RecordLion.RecordsManager.Client
 
         public DateTime GetManagedPropertiesLastEdit()
         {
-            return this.Get<DateTime>(GET_MANAGEDPROPERTIES_LASTEDIT);
+            return this.Get<DateTime>(GET_MANAGEDPROPERTIES_LASTEDIT.FormatResourceUrl());
         }
 
 
@@ -2189,7 +2194,7 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<ManagedProperty> SearchManagedProperties(string name, int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<ManagedProperty>>(string.Format(GET_MANAGEDPROPERTIES_CONTAINING_NAME, name, page, pageSize));
+            return this.Get<ClientPagedItems<ManagedProperty>>(GET_MANAGEDPROPERTIES_CONTAINING_NAME.FormatResourceUrl(name, page, pageSize));
         }
 
 
@@ -2203,31 +2208,122 @@ namespace RecordLion.RecordsManager.Client
 
         public IClientPagedItems<ManagedProperty> GetManagedProperties(int page, int pageSize)
         {
-            return this.Get<ClientPagedItems<ManagedProperty>>(string.Format(GET_MANAGEDPROPERTIES_ALL, page, pageSize));
+            return this.Get<ClientPagedItems<ManagedProperty>>(GET_MANAGEDPROPERTIES_ALL.FormatResourceUrl(page, pageSize));
         }
 
 
         public ManagedProperty GetManagedProperty(long id)
         {
-            return this.Get<ManagedProperty>(string.Format(GET_MANAGEDPROPERTY_WITH_ID, id));
+            return this.Get<ManagedProperty>(GET_MANAGEDPROPERTY_WITH_ID.FormatResourceUrl(id));
         }
 
 
         public ManagedProperty CreateManagedProperty(ManagedProperty property)
         {
-            return this.Post<ManagedProperty>(POST_MANAGEDPROPERTY, property);
+            return this.Post<ManagedProperty>(POST_MANAGEDPROPERTY.FormatResourceUrl(), property);
         }
 
 
         public ManagedProperty UpdateManagedProperty(ManagedProperty property)
         {
-            return this.Put<ManagedProperty>(PUT_MANAGEDPROPERTY, property);
+            return this.Put<ManagedProperty>(PUT_MANAGEDPROPERTY.FormatResourceUrl(), property);
         }
 
 
         public void DeleteManagedProperty(long id)
         {
-            this.Delete(string.Format(DELETE_MANAGEDPROPERTY_WITH_ID, id));
+            this.Delete(DELETE_MANAGEDPROPERTY_WITH_ID.FormatResourceUrl(id));
+        }
+
+        #endregion
+
+
+        #region Rule Sets
+
+        public string GetRuleSetsAsJson()
+        {
+            return this.GetRuleSetsAsJson(0, 0);
+        }
+
+
+        public string GetRuleSetsAsJson(int page, int pageSize)
+        {
+            using (var client = this.GetClient())
+            {
+                return client.DownloadString(new Uri(GET_RULESETS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
+            }
+        }
+
+
+        public IEnumerable<RuleSet> GetRuleSetsFromJson(string json)
+        {
+            var page = this.GetRuleSetsWithPageDataFromJson(json);
+
+            return page.Items;
+        }
+
+
+        public IClientPagedItems<RuleSet> GetRuleSetsWithPageDataFromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ClientPagedItems<RuleSet>>(json);
+        }
+
+
+        public DateTime GetRuleSetsLastEdit()
+        {
+            return this.Get<DateTime>(GET_RULESETS_LASTEDIT.FormatResourceUrl());
+        }
+
+
+        public IEnumerable<RuleSet> SearchRuleSets(string title)
+        {
+            var page = this.SearchRuleSets(title, 0, 0);
+
+            return page.Items;
+        }
+
+
+        public IClientPagedItems<RuleSet> SearchRuleSets(string title, int page, int pageSize)
+        {
+            return this.Get<ClientPagedItems<RuleSet>>(GET_RULESETS_CONTAINING_TITLE.FormatResourceUrl(title, page, pageSize));
+        }
+
+
+        public IEnumerable<RuleSet> GetRuleSets()
+        {
+            var page = this.GetRuleSets(0, 0);
+
+            return page.Items;
+        }
+
+
+        public IClientPagedItems<RuleSet> GetRuleSets(int page, int pageSize)
+        {
+            return this.Get<ClientPagedItems<RuleSet>>(GET_RULESETS_ALL.FormatResourceUrl(page, pageSize));
+        }
+
+
+        public RuleSet GetRuleSet(long id)
+        {
+            return this.Get<RuleSet>(GET_RULESET_WITH_ID.FormatResourceUrl(id));
+        }
+
+
+        public RuleSet CreateRuleSet(RuleSet ruleSet)
+        {
+            return this.Post<RuleSet>(POST_RULESET.FormatResourceUrl(), ruleSet);
+        }
+
+
+        public RuleSet UpdateRuleSet(RuleSet ruleSet)
+        {
+            return this.Put<RuleSet>(PUT_RULESET.FormatResourceUrl(), ruleSet);
+        }
+
+
+        public void DeleteRuleSet(long id)
+        {
+            this.Delete(DELETE_RULESET_WITH_ID.FormatResourceUrl(id));
         }
 
         #endregion
@@ -2379,8 +2475,8 @@ namespace RecordLion.RecordsManager.Client
         {
             if (credentials != null)
             {
-                var buffer = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", this.credentials.Username, this.credentials.Password));
-                return string.Format("Basic {0}", Convert.ToBase64String(buffer));
+                var buffer = Encoding.ASCII.GetBytes($"{this.credentials.Username}:{this.credentials.Password}");
+                return $"Basic {Convert.ToBase64String(buffer)}";
             }
                     
             return string.Empty;
@@ -2400,13 +2496,13 @@ namespace RecordLion.RecordsManager.Client
                 }
             }
             
-            if (this.token == null || this.token.ValidTo < DateTime.Now)
+            if (this.token == null || this.token.ExpiresOn < DateTime.Now)
                 this.token = this.securityTokenRequestor.RequestToken(this.issuer, this.baseUrl, this.credentials);
         
             if (this.token != null)
             {
-                var buffer = Encoding.ASCII.GetBytes(token.TokenXml.OuterXml);
-                return string.Format("Saml {0}", Convert.ToBase64String(buffer));
+                var buffer = Encoding.ASCII.GetBytes(token.Token);
+                return $"{this.token.TokenType} {Convert.ToBase64String(buffer)}";
             }
             
             return string.Empty;
@@ -2498,8 +2594,9 @@ namespace RecordLion.RecordsManager.Client
                     }
                 }
             }
-        }
-                                         
+        }                     
+
+                                  
         #endregion
                                                      
             
@@ -2596,6 +2693,7 @@ namespace RecordLion.RecordsManager.Client
         private const string GET_RECORDCLASSLIFECYCLES_ALL = "/api/v1/recordclasslifecycles?page={0}&pageSize={1}";
         private const string GET_RECORDCLASSLIFECYCLES_RECORDCLASSTITLEORLIFECYCLETITLE = "/api/v1/recordclasslifecycles?recordClassTitleOrLifecycleTitle={0}&page={1}&pageSize={2}";
         private const string GET_RECORDCLASSLIFECYCLE_WITH_ID = "/api/v1/recordclasslifecycles/{0}";
+        private const string GET_RECORDCLASSLIFECYCLE_WITH_RECORDCLASSID = "/api/v1/recordclasslifecycles?recordClassId={0}";
         private const string POST_RECORDCLASSLIFECYCLE = "/api/v1/recordclasslifecycles";
         private const string PUT_RECORDCLASSLIFECYCLE = "/api/v1/recordclasslifecycles";
         private const string DELETE_RECORDCLASSLIFECYCLE_WITH_ID = "/api/v1/recordclasslifecycles/{0}";
@@ -2673,6 +2771,14 @@ namespace RecordLion.RecordsManager.Client
         private const string GET_INBOX_RECORDREQUESTS_CONTAINING_TITLE = "/api/v1/requestsinbox?title={0}&page={1}&pageSize={2}";
         private const string GET_INBOX_RECORDREQUEST_WITH_ID = "/api/v1/requestsinbox/{0}";
         private const string PUT_INBOX_RECORDREQUEST_WITH_ID = "/api/v1/requestsinbox?id={0}";
+
+        private const string GET_RULESETS_LASTEDIT = "/api/v1/rulesets?lastedit";
+        private const string GET_RULESETS_ALL = "/api/v1/rulesets?page={0}&pageSize={1}";
+        private const string GET_RULESETS_CONTAINING_TITLE = "/api/v1/rulesets?title={0}&page={1}&pageSize={2}";
+        private const string GET_RULESET_WITH_ID = "/api/v1/rulesets/{0}";
+        private const string POST_RULESET = "/api/v1/rulesets";
+        private const string PUT_RULESET = "/api/v1/rulesets";
+        private const string DELETE_RULESET_WITH_ID = "/api/v1/rulesets/{0}";
 
         #endregion
     }
