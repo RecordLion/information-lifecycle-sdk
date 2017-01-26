@@ -1,25 +1,14 @@
-﻿using System;
-using RecordLion.RecordsManager.Client;
-
-namespace IntegrationApp
+﻿namespace IntegrationApp
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Please enter the URL for your Information Lifecycle server...");
+            //Run the desired API examples by (un)commenting the methods below...
 
-            string url = Console.ReadLine();
+            ProgramClientObjectModel.Execute(args);
 
-            //Create a new client using default network credentials
-            IRecordsManagerClient client = RecordsManagerClientFactory.Create(url);
-
-            //Currently for a production scenario, you would need to get the retention trigger by ID
-            //This sample finds the first manual, event-based, retention trigger and uses that instead.
-            RetentionTrigger retentionTrigger = RetentionTriggerIntegrations.GetFirstManualEventTrigger(client);
-
-            //Create an event occurrence for the specified trigger using the specified property name & value
-            EventOccurrence eventOccurrence = EventOccurrenceIntegration.CreatePropertyEventOccurrence(client, retentionTrigger.Id, "LoanNumber", "12345");
+            //ProgramRestApi.Execute(args);
         }
     }
 }
