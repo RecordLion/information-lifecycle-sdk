@@ -154,12 +154,12 @@ namespace RecordLion.RecordsManager.Client
         }
 
         #region Record Classes
-        
+
         public string GetAllRecordClassesAsJson()
         {
             return this.GetAllRecordClassesAsJson(0, 0);
         }
-        
+
 
         public string GetAllRecordClassesAsJson(int page, int pageSize)
         {
@@ -168,13 +168,13 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_RECORDCLASSES_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
-        
+
 
         public string GetRecordClassesAsJson(long? parentId = null)
         {
             return this.GetRecordClassesAsJson(0, 0, parentId);
         }
-        
+
 
         public string GetRecordClassesAsJson(int page, int pageSize, long? parentId = null)
         {
@@ -183,13 +183,13 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_RECORDCLASSES.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty), UriKind.Relative));
             }
         }
-        
+
 
         public string GetAllOpenRecordClassesAsJson()
         {
             return this.GetAllOpenRecordClassesAsJson(0, 0);
         }
-        
+
 
         public string GetAllOpenRecordClassesAsJson(int page, int pageSize)
         {
@@ -198,13 +198,13 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_RECORDCLASSES_ALL_OPEN.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
-        
+
 
         public string GetOpenRecordClassesAsJson(long? parentId = null)
         {
             return this.GetOpenRecordClassesAsJson(0, 0, parentId);
         }
-        
+
 
         public string GetOpenRecordClassesAsJson(int page, int pageSize, long? parentId = null)
         {
@@ -212,110 +212,110 @@ namespace RecordLion.RecordsManager.Client
             {
                 return client.DownloadString(new Uri(GET_RECORDCLASSES_OPEN.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty), UriKind.Relative));
             }
-        }        
-        
+        }
+
 
         public IEnumerable<RecordClass> GetRecordClassesFromJson(string json)
         {
             var page = this.GetRecordClassesWithPageDataFromJson(json);
-            
+
             return page.Items;
         }
-        
+
 
         public IClientPagedItems<RecordClass> GetRecordClassesWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<ClientPagedItems<RecordClass>>(json);
         }
-        
+
 
         public DateTime GetRecordClassesLastEdit()
         {
             return this.Get<DateTime>(GET_RECORDCLASSES_LASTEDIT.FormatResourceUrl());
         }
-        
+
 
         public IEnumerable<RecordClass> SearchRecordClasses(string titleOrCode)
         {
             var page = this.SearchRecordClasses(titleOrCode, 0, 0);
-            
+
             return page.Items;
         }
-        
+
 
         public IClientPagedItems<RecordClass> SearchRecordClasses(string titleOrCode, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<RecordClass>>(GET_RECORDCLASSES_CONTAINING_TITLEORCODE.FormatResourceUrl(titleOrCode, page, pageSize));
         }
-        
+
 
         public IEnumerable<RecordClass> GetAllRecordClasses()
         {
             var page = this.GetAllRecordClasses(0, 0);
-            
+
             return page.Items;
         }
-        
+
 
         public IClientPagedItems<RecordClass> GetAllRecordClasses(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<RecordClass>>(GET_RECORDCLASSES_ALL.FormatResourceUrl(page, pageSize));
         }
-        
+
 
         public IEnumerable<RecordClass> GetRecordClasses(long? parentId = null)
         {
             var page = this.GetRecordClasses(0, 0, parentId);
-            
+
             return page.Items;
         }
-        
+
 
         public IClientPagedItems<RecordClass> GetRecordClasses(int page, int pageSize, long? parentId = null)
         {
             return this.Get<ClientPagedItems<RecordClass>>(GET_RECORDCLASSES.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty));
         }
-        
+
 
         public IEnumerable<RecordClass> GetAllOpenRecordClasses()
         {
             var page = this.GetAllOpenRecordClasses(0, 0);
-            
+
             return page.Items;
         }
-        
+
 
         public IClientPagedItems<RecordClass> GetAllOpenRecordClasses(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<RecordClass>>(GET_RECORDCLASSES_ALL_OPEN.FormatResourceUrl(page, pageSize));
         }
-        
+
 
         public IEnumerable<RecordClass> GetOpenRecordClasses(long? parentId = null)
         {
             var page = this.GetOpenRecordClasses(0, 0, parentId);
-            
+
             return page.Items;
         }
-        
+
 
         public IClientPagedItems<RecordClass> GetOpenRecordClasses(int page, int pageSize, long? parentId = null)
         {
             return this.Get<ClientPagedItems<RecordClass>>(GET_RECORDCLASSES_OPEN.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty));
         }
-        
+
 
         public RecordClass GetRecordClass(long id)
         {
             return this.Get<RecordClass>(GET_RECORDCLASS_WITH_ID.FormatResourceUrl(id));
         }
-        
+
 
         public RecordClass GetRecordClass(string code)
         {
             return this.Get<RecordClass>(GET_RECORDCLASS_WITH_CODE.FormatResourceUrl(code));
         }
-        
+
 
         public RecordClass CreateRecordClass(RecordClass recordClass)
         {
@@ -329,36 +329,36 @@ namespace RecordLion.RecordsManager.Client
 
             return this.CreateRecordClass(recordClass);
         }
-        
+
 
         public RecordClass UpdateRecordClass(RecordClass recordClass)
         {
             return this.Put<RecordClass>(PUT_RECORDCLASS.FormatResourceUrl(), recordClass);
         }
-        
+
 
         public void DeleteRecordClass(long id)
         {
             this.Delete(DELETE_RECORDCLASS_WITH_ID.FormatResourceUrl(id));
         }
-        
+
         #endregion
 
-        
+
         #region Records
 
         public DateTime GetRecordsLastEdit()
         {
             return this.Get<DateTime>(GET_RECORDS_LASTEDIT.FormatResourceUrl());
         }
-            
-        
+
+
         public string GetRecordsAsJson()
         {
             return this.GetRecordsAsJson(0, 0);
         }
-            
-        
+
+
         public string GetRecordsAsJson(int page, int pageSize)
         {
             using (var client = this.GetClient())
@@ -387,8 +387,8 @@ namespace RecordLion.RecordsManager.Client
         {
             return this.GetRecordsForContainerAsJson(containerId, 0, 0);
         }
-            
-        
+
+
         public string GetRecordsForContainerAsJson(long containerId, int page, int pageSize)
         {
             using (var client = this.GetClient())
@@ -396,44 +396,44 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_RECORDS_FOR_CONTAINER.FormatResourceUrl(containerId, page, pageSize), UriKind.Relative));
             }
         }
-            
-        
+
+
         public IEnumerable<Record> GetRecordsFromJson(string json)
         {
             var page = this.GetRecordsWithPageDataFromJson(json);
-        
+
             return page.Items;
         }
-            
-        
+
+
         public IClientPagedItems<Record> GetRecordsWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<IClientPagedItems<Record>>(json);
         }
-            
-        
+
+
         public IEnumerable<Record> SearchRecords(string titleOrUri)
         {
             var page = this.SearchRecords(titleOrUri, 0, 0);
-        
+
             return page.Items;
         }
-            
-        
+
+
         public IClientPagedItems<Record> SearchRecords(string titleOrUri, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<Record>>(GET_RECORDS_CONTAINING_TITLEORURI.FormatResourceUrl(titleOrUri, page, pageSize));
-        }                 
-            
-        
+        }
+
+
         public IEnumerable<Record> GetRecords()
         {
             var page = this.GetRecords(0, 0);
-        
+
             return page.Items;
         }
-            
-        
+
+
         public IClientPagedItems<Record> GetRecords(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<Record>>(GET_RECORDS_ALL.FormatResourceUrl(page, pageSize));
@@ -457,232 +457,232 @@ namespace RecordLion.RecordsManager.Client
         public IEnumerable<Record> GetRecordsForContainer(long containerId)
         {
             var page = this.GetRecordsForContainer(containerId, 0, 0);
-        
+
             return page.Items;
         }
-            
-        
+
+
         public IClientPagedItems<Record> GetRecordsForContainer(long containerId, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<Record>>(GET_RECORDS_FOR_CONTAINER.FormatResourceUrl(containerId, page, pageSize));
         }
-            
-        
+
+
         public Record GetRecord(long id)
         {
             return this.Get<Record>(GET_RECORD_WITH_ID.FormatResourceUrl(id));
         }
-            
-        
+
+
         public Record GetRecordByIdentifier(string identifier)
         {
             return this.Get<Record>(GET_RECORD_WITH_IDENTIFIER.FormatResourceUrl(identifier));
         }
-            
-        
+
+
         public Record GetRecordByUri(string uri)
         {
             return this.Get<Record>(GET_RECORD_WITH_URI.FormatResourceUrl(uri));
         }
-            
-        
+
+
         public void DeclareRecord(string uri)
         {
             var declaration = new RecordDeclaration()
             {
                 Record = RecordDeclarationState.Declare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
-            
-        
+
+
         public void UndeclareRecord(string uri)
         {
             var declaration = new RecordDeclaration()
             {
                 Record = RecordDeclarationState.Undeclare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
-            
-        
+
+
         public void DeclareVital(string uri)
         {
             var declaration = new RecordDeclaration()
             {
                 Vital = RecordDeclarationState.Declare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
-            
-        
+
+
         public void UndeclareVital(string uri)
         {
             var declaration = new RecordDeclaration()
             {
                 Vital = RecordDeclarationState.Undeclare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
-            
-        
+
+
         public void DeclareObsolete(string uri)
         {
             var declaration = new RecordDeclaration()
             {
                 Obsolete = RecordDeclarationState.Declare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
-            
-        
+
+
         public void UndeclareObsolete(string uri)
         {
             var declaration = new RecordDeclaration()
             {
                 Obsolete = RecordDeclarationState.Undeclare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION.FormatResourceUrl(uri), declaration);
         }
-            
-        
+
+
         public void DeclareRecordById(long id)
         {
             var declaration = new RecordDeclaration()
             {
                 Record = RecordDeclarationState.Declare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
-            
-        
+
+
         public void UndeclareRecordById(long id)
         {
             var declaration = new RecordDeclaration()
             {
                 Record = RecordDeclarationState.Undeclare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
-            
-        
+
+
         public void DeclareVitalById(long id)
         {
             var declaration = new RecordDeclaration()
             {
                 Vital = RecordDeclarationState.Declare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
-            
-        
+
+
         public void UndeclareVitalById(long id)
         {
             var declaration = new RecordDeclaration()
             {
                 Vital = RecordDeclarationState.Undeclare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
-            
-        
+
+
         public void DeclareObsoleteById(long id)
         {
             var declaration = new RecordDeclaration()
             {
                 Obsolete = RecordDeclarationState.Declare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
-            
-        
+
+
         public void UndeclareObsoleteById(long id)
         {
             var declaration = new RecordDeclaration()
             {
                 Obsolete = RecordDeclarationState.Undeclare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_ID.FormatResourceUrl(id), declaration);
         }
-            
-        
+
+
         public void DeclareRecordByIdentifier(string identifier)
         {
             var declaration = new RecordDeclaration()
             {
                 Record = RecordDeclarationState.Declare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
-            
-        
+
+
         public void UndeclareRecordByIdentifier(string identifier)
         {
             var declaration = new RecordDeclaration()
             {
                 Record = RecordDeclarationState.Undeclare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
-            
-        
+
+
         public void DeclareVitalByIdentifier(string identifier)
         {
             var declaration = new RecordDeclaration()
             {
                 Vital = RecordDeclarationState.Declare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
-            
-        
+
+
         public void UndeclareVitalByIdentifier(string identifier)
         {
             var declaration = new RecordDeclaration()
             {
                 Vital = RecordDeclarationState.Undeclare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
-            
-        
+
+
         public void DeclareObsoleteByIdentifier(string identifier)
         {
             var declaration = new RecordDeclaration()
             {
                 Obsolete = RecordDeclarationState.Declare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
-            
-        
+
+
         public void UndeclareObsoleteByIdentifier(string identifier)
         {
             var declaration = new RecordDeclaration()
             {
                 Obsolete = RecordDeclarationState.Undeclare
             };
-                
+
             this.Put(PUT_RECORD_DECLARATION_WITH_IDENTIFIER.FormatResourceUrl(identifier), declaration);
         }
-            
+
         #endregion
 
 
@@ -692,8 +692,8 @@ namespace RecordLion.RecordsManager.Client
         {
             return this.GetAllContainersAsJson(0, 0);
         }
-        
-            
+
+
         public string GetAllContainersAsJson(int page, int pageSize)
         {
             using (var client = this.GetClient())
@@ -701,14 +701,14 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_CONTAINERS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
-                
-            
+
+
         public string GetContainersAsJson(long? parentId = null)
         {
             return this.GetContainersAsJson(0, 0, parentId);
         }
-        
-            
+
+
         public string GetContainersAsJson(int page, int pageSize, long? parentId = null)
         {
             using (var client = this.GetClient())
@@ -716,170 +716,170 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_CONTAINERS.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty), UriKind.Relative));
             }
         }
-                
-            
+
+
         public IEnumerable<Container> GetContainersFromJson(string json)
         {
             var page = this.GetContainersWithPageDataFromJson(json);
-        
+
             return page.Items;
         }
 
-            
+
         public IClientPagedItems<Container> GetContainersWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<IClientPagedItems<Container>>(json);
         }
-        
-            
+
+
         public DateTime GetContainerLastEdit()
         {
             return this.Get<DateTime>(GET_CONTAINERS_LASTEDIT.FormatResourceUrl());
         }
-        
-            
+
+
         public IEnumerable<Container> SearchContainers(string title)
         {
             var page = this.SearchContainers(title, 0, 0);
-        
+
             return page.Items;
         }
 
-            
+
         public IClientPagedItems<Container> SearchContainers(string title, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<Container>>(GET_CONTAINERS_CONTAINING_TITLE.FormatResourceUrl(title, page, pageSize));
         }
-        
-            
+
+
         public IEnumerable<Container> GetAllContainers()
         {
             var page = this.GetAllContainers(0, 0);
-        
+
             return page.Items;
         }
 
-            
+
         public IClientPagedItems<Container> GetAllContainers(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<Container>>(GET_CONTAINERS_ALL.FormatResourceUrl(page, pageSize));
         }
-        
-            
+
+
         public IEnumerable<Container> GetContainers(long? parentId = null)
         {
             var page = this.GetContainers(0, 0, parentId);
-        
+
             return page.Items;
         }
 
-            
+
         public IClientPagedItems<Container> GetContainers(int page, int pageSize, long? parentId = null)
         {
             return this.Get<ClientPagedItems<Container>>(GET_CONTAINERS.FormatResourceUrl(page, pageSize, (parentId.HasValue) ? parentId.Value.ToString() : string.Empty));
         }
-        
-            
+
+
         public Container GetContainer(long id)
         {
             return this.Get<Container>(GET_CONTAINER_WITH_ID.FormatResourceUrl(id));
         }
-        
-            
+
+
         public Container GetContainer(string barcode)
         {
             return this.Get<Container>(GET_CONTAINER_WITH_BARCODE.FormatResourceUrl(barcode));
         }
-        
-            
+
+
         public Container CreateContainer(Container container)
         {
             return this.Post<Container>(POST_CONTAINER.FormatResourceUrl(), container);
         }
-        
-            
+
+
         public Container UpdateContainer(Container container)
         {
             return this.Put<Container>(PUT_CONTAINER.FormatResourceUrl(), container);
         }
-        
-            
+
+
         public void DeleteContainer(long id)
         {
             this.Delete(DELETE_CONTAINER_WITH_ID.FormatResourceUrl(id));
         }
-        
+
         #endregion
-        
+
 
         #region Barcodes
-        
+
         public string GenerateBarcode(long barcodeSchemeId)
         {
             return this.Get<string>(GET_BARCODES_GENERATE.FormatResourceUrl(barcodeSchemeId));
         }
-        
-        
+
+
         public DateTime GetBarcodeSchemesLastEdit()
         {
             return this.Get<DateTime>(GET_BARCODES_LASTEDIT.FormatResourceUrl());
         }
-        
-        
+
+
         public IEnumerable<BarcodeScheme> SearchBarcodeSchemes(string title)
         {
             var page = this.SearchBarcodeSchemes(title, 0, 0);
 
             return page.Items;
         }
-            
+
 
         public IClientPagedItems<BarcodeScheme> SearchBarcodeSchemes(string title, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<BarcodeScheme>>(GET_BARCODES_WITH_TITLE.FormatResourceUrl(title, page, pageSize));
-        }             
-        
-        
+        }
+
+
         public IEnumerable<BarcodeScheme> GetBarcodeSchemes()
         {
             var paged = this.GetBarcodeSchemes(0, 0);
 
             return paged.Items;
         }
-            
+
 
         public IClientPagedItems<BarcodeScheme> GetBarcodeSchemes(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<BarcodeScheme>>(GET_BARCODES_ALL.FormatResourceUrl(page, pageSize));
         }
-        
-        
+
+
         public BarcodeScheme GetBarcodeScheme(long id)
         {
             return this.Get<BarcodeScheme>(GET_BARCODES_WITH_ID.FormatResourceUrl(id));
         }
-        
-        
+
+
         public BarcodeScheme CreateBarcodeScheme(BarcodeScheme scheme)
         {
             return this.Post<BarcodeScheme>(POST_BARCODE.FormatResourceUrl(), scheme);
         }
-        
-        
+
+
         public BarcodeScheme UpdateBarcodeScheme(BarcodeScheme scheme)
         {
             return this.Put<BarcodeScheme>(PUT_BARCODE.FormatResourceUrl(), scheme);
         }
-        
-        
+
+
         public void DeleteBarcodeScheme(long id)
         {
             this.Delete(DELETE_BARCODE.FormatResourceUrl(id));
         }
-        
+
         #endregion
-            
-        
+
+
         #region Recordization
 
         public IEnumerable<Record> ProcessRecordization(IEnumerable<Recordize> recordizers)
@@ -887,22 +887,22 @@ namespace RecordLion.RecordsManager.Client
             return this.Post<IEnumerable<Record>>(POST_RECORDIZERS.FormatResourceUrl(), recordizers.ToArray());
         }
 
-        
+
         public void DeleteRecordization(string recordizedUrl, bool deleteAll)
         {
             this.Delete(DELETE_RECORDIZERS.FormatResourceUrl(recordizedUrl, deleteAll));
         }
 
         #endregion
-        
-            
+
+
         #region Triggers
 
         public string GetTriggersAsJson()
         {
             return this.GetTriggersAsJson(0, 0);
         }
-        
+
 
         public string GetTriggersAsJson(int page, int pageSize)
         {
@@ -911,16 +911,16 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_TRIGGERS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
-        
-            
+
+
         public IEnumerable<RetentionTrigger> GetTriggersFromJson(string json)
         {
             var page = this.GetTriggersWithPageDataFromJson(json);
-        
+
             return page.Items;
         }
-        
-        
+
+
         public IClientPagedItems<RetentionTrigger> GetTriggersWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<ClientPagedItems<RetentionTrigger>>(json);
@@ -936,11 +936,11 @@ namespace RecordLion.RecordsManager.Client
         public IEnumerable<RetentionTrigger> SearchTriggers(string title)
         {
             var page = this.SearchTriggers(title, 0, 0);
-        
+
             return page.Items;
         }
-        
-        
+
+
         public IClientPagedItems<RetentionTrigger> SearchTriggers(string title, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<RetentionTrigger>>(GET_TRIGGERS_CONTAINING_TITLE.FormatResourceUrl(title, page, pageSize));
@@ -950,11 +950,11 @@ namespace RecordLion.RecordsManager.Client
         public IEnumerable<RetentionTrigger> GetTriggers()
         {
             var page = this.GetTriggers(0, 0);
-        
+
             return page.Items;
         }
-        
-        
+
+
         public IClientPagedItems<RetentionTrigger> GetTriggers(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<RetentionTrigger>>(GET_TRIGGERS_ALL.FormatResourceUrl(page, pageSize));
@@ -985,16 +985,16 @@ namespace RecordLion.RecordsManager.Client
         }
 
         #endregion
-        
-        
+
+
         #region Retentions
-        
+
         public string GetRetentionsAsJson()
         {
             return this.GetRetentionsAsJson(0, 0);
         }
 
-        
+
         public string GetRetentionsAsJson(int page, int pageSize)
         {
             using (var client = this.GetClient())
@@ -1002,55 +1002,55 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_RETENTIONS_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
-        
-        
+
+
         public IEnumerable<Retention> GetRetentionsFromJson(string json)
         {
             var page = this.GetRetentionsWithPageDataFromJson(json);
-            
+
             return page.Items;
         }
 
-        
+
         public IClientPagedItems<Retention> GetRetentionsWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<ClientPagedItems<Retention>>(json);
         }
-        
+
 
         public DateTime GetRetentionsLastEdit()
         {
             return this.Get<DateTime>(GET_RETENTIONS_LASTEDIT.FormatResourceUrl());
         }
-        
+
 
         public IEnumerable<Retention> GetRetentions()
         {
             var page = this.GetRetentions(0, 0);
-            
+
             return page.Items;
         }
 
-        
+
         public IClientPagedItems<Retention> GetRetentions(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<Retention>>(GET_RETENTIONS_ALL.FormatResourceUrl(page, pageSize));
         }
-        
+
 
         public IEnumerable<Retention> SearchRetentions(string titleOrAuthority)
         {
             var page = this.SearchRetentions(titleOrAuthority, 0, 0);
-            
+
             return page.Items;
         }
 
-        
+
         public IClientPagedItems<Retention> SearchRetentions(string titleOrAuthority, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<Retention>>(GET_RETENTIONS_CONTAINING_TITLEORAUTHORITY.FormatResourceUrl(titleOrAuthority, page, pageSize));
         }
-        
+
 
         public Retention GetRetention(long id)
         {
@@ -1068,18 +1068,18 @@ namespace RecordLion.RecordsManager.Client
         {
             return this.Put<Retention>(PUT_RETENTION.FormatResourceUrl(), retention);
         }
-        
+
 
         public void DeleteRetention(long id)
         {
             this.Delete(DELETE_RETENTION_WITH_ID.FormatResourceUrl(id));
         }
-        
+
         #endregion
 
-        
+
         #region Lifecycles
-            
+
         public string GetLifecylesAsJson()
         {
             return this.GetLifecylesAsJson(0, 0);
@@ -1094,11 +1094,11 @@ namespace RecordLion.RecordsManager.Client
             }
         }
 
-        
+
         public IEnumerable<Lifecycle> GetLifecylesFromJson(string json)
         {
             var page = this.GetLifecyclesWithPageDataFromJson(json);
-                
+
             return page.Items;
         }
 
@@ -1107,18 +1107,18 @@ namespace RecordLion.RecordsManager.Client
         {
             return JsonConvert.DeserializeObject<ClientPagedItems<Lifecycle>>(json);
         }
-            
-        
+
+
         public DateTime GetLifecyclesLastEdit()
         {
             return this.Get<DateTime>(GET_LIFECYCLES_LASTEDIT.FormatResourceUrl());
         }
-            
-        
+
+
         public IEnumerable<Lifecycle> SearchLifecycles(string title)
         {
             var page = this.SearchLifecycles(title, 0, 0);
-        
+
             return page.Items;
         }
 
@@ -1127,12 +1127,12 @@ namespace RecordLion.RecordsManager.Client
         {
             return this.Get<ClientPagedItems<Lifecycle>>(GET_LIFECYCLES_CONTAINING_TITLE.FormatResourceUrl(title, page, pageSize));
         }
-            
-        
+
+
         public IEnumerable<Lifecycle> GetLifecycles()
         {
             var page = this.GetLifecycles(0, 0);
-        
+
             return page.Items;
         }
 
@@ -1141,8 +1141,8 @@ namespace RecordLion.RecordsManager.Client
         {
             return this.Get<ClientPagedItems<Lifecycle>>(GET_LIFECYCLES_ALL.FormatResourceUrl(page, pageSize));
         }
-            
-        
+
+
         public Lifecycle GetLifecycle(long id)
         {
             return this.Get<Lifecycle>(GET_LIFECYCLE_WITH_ID.FormatResourceUrl(id));
@@ -1153,35 +1153,35 @@ namespace RecordLion.RecordsManager.Client
         {
             return this.Get<List<LifecyclePhaseSummary>>(GET_LIFECYCLE_SUMMARY_WITH_ID.FormatResourceUrl(id));
         }
-            
-        
+
+
         public Lifecycle CreateLifecycle(Lifecycle lifecycle)
         {
             return this.Post<Lifecycle>(POST_LIFECYCLE.FormatResourceUrl(), lifecycle);
         }
-            
-        
+
+
         public Lifecycle UpdateLifecycle(Lifecycle lifecycle)
         {
             return this.Put<Lifecycle>(PUT_LIFECYCLE.FormatResourceUrl(), lifecycle);
         }
-            
-        
+
+
         public void DeleteLifecycle(long id)
         {
             this.Delete(DELETE_LIFECYCLE_WITH_ID.FormatResourceUrl(id));
         }
-            
+
         #endregion
 
 
         #region RecordClass Lifecycles
-        
+
         public string GetRecordClassLifecyclesAsJson()
         {
             return this.GetRecordClassLifecyclesAsJson(0, 0);
         }
-        
+
 
         public string GetRecordClassLifecyclesAsJson(int page, int pageSize)
         {
@@ -1195,51 +1195,51 @@ namespace RecordLion.RecordsManager.Client
         public IEnumerable<RecordClassLifecycle> GetRecordClassLifecyclesFromJson(string json)
         {
             var page = this.GetRecordClassLifecyclesWithPageDataFromJson(json);
-            
+
             return page.Items;
         }
-        
+
 
         public IClientPagedItems<RecordClassLifecycle> GetRecordClassLifecyclesWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<ClientPagedItems<RecordClassLifecycle>>(json);
         }
 
-            
+
         public DateTime GetRecordClassLifecyclesLastEdit()
         {
             return this.Get<DateTime>(GET_RECORDCLASSLIFECYCLES_LASTEDIT.FormatResourceUrl());
         }
-        
-            
+
+
         public IEnumerable<RecordClassLifecycle> SearchRecordClassLifecycles(string title)
         {
             var page = this.SearchRecordClassLifecycles(title, 0, 0);
-        
+
             return page.Items;
         }
-        
+
 
         public IClientPagedItems<RecordClassLifecycle> SearchRecordClassLifecycles(string title, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<RecordClassLifecycle>>(GET_RECORDCLASSLIFECYCLES_RECORDCLASSTITLEORLIFECYCLETITLE.FormatResourceUrl(title, page, pageSize));
         }
 
-            
+
         public IEnumerable<RecordClassLifecycle> GetRecordClassLifecycles()
         {
             var page = this.GetRecordClassLifecycles(0, 0);
-        
+
             return page.Items;
         }
-        
+
 
         public IClientPagedItems<RecordClassLifecycle> GetRecordClassLifecycles(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<RecordClassLifecycle>>(GET_RECORDCLASSLIFECYCLES_ALL.FormatResourceUrl(page, pageSize));
         }
 
-            
+
         public RecordClassLifecycle GetRecordClassLifecycle(long id)
         {
             return this.Get<RecordClassLifecycle>(GET_RECORDCLASSLIFECYCLE_WITH_ID.FormatResourceUrl(id));
@@ -1255,30 +1255,30 @@ namespace RecordLion.RecordsManager.Client
         {
             return this.Post<RecordClassLifecycle>(POST_RECORDCLASSLIFECYCLE.FormatResourceUrl(), lifecycle);
         }
-        
-            
+
+
         public RecordClassLifecycle UpdateRecordClassLifecycle(RecordClassLifecycle lifecycle)
         {
             return this.Put<RecordClassLifecycle>(PUT_RECORDCLASSLIFECYCLE.FormatResourceUrl(), lifecycle);
         }
-        
-            
+
+
         public void DeleteRecordClassLifecycle(long id)
         {
             this.Delete(DELETE_RECORDCLASSLIFECYCLE_WITH_ID.FormatResourceUrl(id));
         }
-        
+
         #endregion
-        
+
 
         #region Event Occurrences
-        
+
         public string GetEventOccurrencesAsJson()
         {
             return this.GetEventOccurrencesAsJson(0, 0);
         }
 
-        
+
         public string GetEventOccurrencesAsJson(int page, int pageSize)
         {
             using (var client = this.GetClient())
@@ -1286,41 +1286,41 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_EVENTOCCURRENCES_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
-        
+
 
         public IEnumerable<EventOccurrence> GetEventOccurrencesFromJson(string json)
         {
             var page = this.GetEventOccurrencesWithPageDataFromJson(json);
-            
+
             return page.Items;
         }
-            
-        
+
+
         public IClientPagedItems<EventOccurrence> GetEventOccurrencesWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<IClientPagedItems<EventOccurrence>>(json);
         }
-            
+
 
         public DateTime GetEventOccurrencesLastEdit()
         {
             return this.Get<DateTime>(GET_EVENTOCCURRENCES_LASTEDIT.FormatResourceUrl());
         }
-        
-        
+
+
         public IEnumerable<EventOccurrence> SearchEventOccurrences(string eventTitle)
         {
             var page = this.SearchEventOccurrences(eventTitle, 0, 0);
 
             return page.Items;
         }
-            
-        
+
+
         public IClientPagedItems<EventOccurrence> SearchEventOccurrences(string eventTitle, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<EventOccurrence>>(GET_EVENTOCCURRENCES_CONTAINING_EVENTTITLE.FormatResourceUrl(eventTitle, page, pageSize));
         }
-            
+
 
         public IEnumerable<EventOccurrence> GetEventOccurrences()
         {
@@ -1328,34 +1328,34 @@ namespace RecordLion.RecordsManager.Client
 
             return page.Items;
         }
-            
-        
+
+
         public IClientPagedItems<EventOccurrence> GetEventOccurrences(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<EventOccurrence>>(GET_EVENTOCCURRENCES_ALL.FormatResourceUrl(page, pageSize));
         }
-            
+
 
         public EventOccurrence GetEventOccurrences(long id)
         {
             return this.Get<EventOccurrence>(GET_EVENTOCCURRENCE_WITH_ID.FormatResourceUrl(id));
         }
-        
-        
+
+
         public EventOccurrence CreateEventOccurrence(EventOccurrence eventOccurrence)
         {
             return this.Post<EventOccurrence>(POST_EVENTOCCURRENCE.FormatResourceUrl(), eventOccurrence);
         }
-        
-        
+
+
         public void DeleteEventOccurrence(long id)
         {
             this.Delete(DELETE_EVENTOCCURRENCE_WITH_ID.FormatResourceUrl(id));
         }
-        
-        #endregion        
-            
-        
+
+        #endregion
+
+
         #region Audit
 
         public string GetAuditsAsJson()
@@ -1371,116 +1371,116 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_AUDIT_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
-            
-        
+
+
         public IEnumerable<AuditEntry> GetAuditsFromJson(string json)
         {
             var page = this.GetAuditsWithPageDataFromJson(json);
-        
+
             return page.Items;
         }
-                
-            
+
+
         public IClientPagedItems<AuditEntry> GetAuditsWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<IClientPagedItems<AuditEntry>>(json);
         }
-        
-            
+
+
         public DateTime GetAuditsLastEdit()
         {
             return this.Get<DateTime>(GET_AUDIT_LASTEDIT.FormatResourceUrl());
         }
 
-        
+
         public IEnumerable<AuditEntry> SearchAudits(DateTime rangeStart, DateTime rangeEnd)
         {
             var page = this.SearchAudits(rangeStart, rangeEnd, 0, 0);
 
             return page.Items;
         }
-        
-            
+
+
         public IClientPagedItems<AuditEntry> SearchAudits(DateTime rangeStart, DateTime rangeEnd, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<AuditEntry>>(GET_AUDIT_IN_RANGE.FormatResourceUrl(rangeStart, rangeEnd, page, pageSize));
         }
-        
-            
+
+
         public IEnumerable<AuditEntry> GetAudits()
         {
             var page = this.GetAudits(0, 0);
 
             return page.Items;
         }
-        
-            
+
+
         public IClientPagedItems<AuditEntry> GetAudits(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<AuditEntry>>(GET_AUDIT_ALL.FormatResourceUrl(page, pageSize));
         }
-        
-            
+
+
         public IEnumerable<AuditEntry> GetAudits(AuditTarget target, long targetId)
         {
             var page = this.GetAudits(target, targetId, 0, 0);
 
             return page.Items;
         }
-        
-            
+
+
         public IClientPagedItems<AuditEntry> GetAudits(AuditTarget target, long targetId, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<AuditEntry>>(GET_AUDIT_FOR_TARGET.FormatResourceUrl(target, targetId, page, pageSize));
         }
-        
-            
+
+
         public IEnumerable<AuditEntry> GetAuditsForRecord(string recordUri)
         {
             var page = this.GetAuditsForRecord(recordUri, 0, 0);
 
             return page.Items;
         }
-        
-            
+
+
         public IClientPagedItems<AuditEntry> GetAuditsForRecord(string recordUri, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<AuditEntry>>(GET_AUDIT_FOR_RECORDURI.FormatResourceUrl(recordUri, page, pageSize));
         }
-        
-            
+
+
         public AuditEntry CreateAudit(NewAuditEntry auditEntry)
         {
             return this.Post<AuditEntry>(POST_AUDIT.FormatResourceUrl(), auditEntry);
         }
 
         #endregion
-        
-            
+
+
         #region Heartbeat
 
         public HeartbeatResult Heartbeat(Heartbeat heartbeat)
         {
             return this.Heartbeat(heartbeat, false);
         }
-        
+
 
         public HeartbeatResult Heartbeat(Heartbeat heartbeat, bool supportsFailover)
         {
             return this.Post<HeartbeatResult>(POST_HEARTBEAT.FormatResourceUrl(supportsFailover), heartbeat);
         }
-        
+
         #endregion
-        
-        
+
+
         #region Legal Cases
-        
+
         public string GetLegalCasesAsJson()
         {
             return this.GetLegalCasesAsJson(0, 0);
         }
-            
-        
+
+
         public string GetLegalCasesAsJson(int page, int pageSize)
         {
             using (var client = this.GetClient())
@@ -1488,14 +1488,14 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_LEGALCASES_ALL.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
-        
-        
+
+
         public string GetOpenLegalCasesAsJson()
         {
             return this.GetOpenLegalCasesAsJson(0, 0);
         }
-        
-        
+
+
         public string GetOpenLegalCasesAsJson(int page, int pageSize)
         {
             using (var client = this.GetClient())
@@ -1503,104 +1503,104 @@ namespace RecordLion.RecordsManager.Client
                 return client.DownloadString(new Uri(GET_LEGALCASES_OPEN.FormatResourceUrl(page, pageSize), UriKind.Relative));
             }
         }
-        
-        
+
+
         public IEnumerable<LegalCase> GetLegalCasesFromJson(string json)
         {
             var page = this.GetLegalCasesWithPageDataFromJson(json);
 
             return page.Items;
         }
-            
-            
+
+
         public IClientPagedItems<LegalCase> GetLegalCasesWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<IClientPagedItems<LegalCase>>(json);
         }
 
-        
+
         public DateTime GetLegalCasesLastEdit()
         {
             return this.Get<DateTime>(GET_LEGALCASES_LASTEDIT.FormatResourceUrl());
         }
-        
+
 
         public IEnumerable<LegalCase> SearchLegalCases(string titleOrNumber)
         {
             var page = this.SearchLegalCases(titleOrNumber, 0, 0);
-            
+
             return page.Items;
         }
 
-        
+
         public IClientPagedItems<LegalCase> SearchLegalCases(string titleOrNumber, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<LegalCase>>(GET_LEGALCASES_CONTAINING_TITLEORNUMBER.FormatResourceUrl(titleOrNumber, page, pageSize));
         }
 
-        
+
         public IEnumerable<LegalCase> GetLegalCases()
         {
             var page = this.GetLegalCases(0, 0);
-            
+
             return page.Items;
         }
 
-        
+
         public IClientPagedItems<LegalCase> GetLegalCases(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<LegalCase>>(GET_LEGALCASES_ALL.FormatResourceUrl(page, pageSize));
         }
 
-        
+
         public IEnumerable<LegalCase> GetOpenLegalCases()
         {
             var page = this.GetOpenLegalCases(0, 0);
-            
+
             return page.Items;
         }
 
-        
+
         public IClientPagedItems<LegalCase> GetOpenLegalCases(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<LegalCase>>(GET_LEGALCASES_OPEN.FormatResourceUrl(page, pageSize));
         }
 
-        
+
         public LegalCase GetLegalCase(long id)
         {
             return this.Get<LegalCase>(GET_LEGALCASES_WITH_ID.FormatResourceUrl(id));
         }
-        
+
 
         public LegalCase CreateLegalCase(LegalCase legalCase)
         {
             return this.Post<LegalCase>(POST_LEGALCASES.FormatResourceUrl(), legalCase);
         }
-        
+
 
         public LegalCase UpdateLegalCase(LegalCase legalCase)
         {
             return this.Put<LegalCase>(PUT_LEGALCASES.FormatResourceUrl(), legalCase);
         }
-        
+
 
         public void DeleteLegalCase(long id)
         {
             this.Delete(DELETE_LEGALCASES_WITH_ID.FormatResourceUrl(id));
         }
-        
+
         #endregion
 
-        
+
         #region Legal Holds
-            
+
         public string GetLegalHoldsAsJson()
         {
             return this.GetLegalHoldsAsJson(0, 0);
         }
-        
-            
+
+
         public string GetLegalHoldsAsJson(int page, int pageSize)
         {
             using (var client = this.GetClient())
@@ -1609,13 +1609,13 @@ namespace RecordLion.RecordsManager.Client
             }
         }
 
-        
+
         public string GetOpenLegalHoldsAsJson()
         {
             return this.GetOpenLegalHoldsAsJson(0, 0);
         }
 
-        
+
         public string GetOpenLegalHoldsAsJson(int page, int pageSize)
         {
             using (var client = this.GetClient())
@@ -1624,15 +1624,15 @@ namespace RecordLion.RecordsManager.Client
             }
         }
 
-        
+
         public IEnumerable<LegalHold> GetLegalHoldsFromJson(string json)
         {
             var page = this.GetLegalHoldsWithPageDataFromJson(json);
 
             return page.Items;
         }
-        
-            
+
+
         public IClientPagedItems<LegalHold> GetLegalHoldsWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<IClientPagedItems<LegalHold>>(json);
@@ -1713,42 +1713,42 @@ namespace RecordLion.RecordsManager.Client
         {
             return this.Get<LegalHold>(GET_LEGALHOLD_WITH_ID.FormatResourceUrl(id));
         }
-            
-        
+
+
         public LegalHold CreateLegalHold(LegalHold legalHold)
         {
             return this.Post<LegalHold>(POST_LEGALHOLD.FormatResourceUrl(), legalHold);
         }
-            
-        
+
+
         public LegalHold UpdateLegalHold(LegalHold legalHold)
         {
             return this.Put<LegalHold>(PUT_LEGALHOLD.FormatResourceUrl(), legalHold);
         }
-            
-        
+
+
         public void DeleteLegalHold(long legalCaseId, string uri)
         {
             this.Delete(DELETE_LEGALHOLD_FOR_CASE_WITH_URI.FormatResourceUrl(legalCaseId, uri));
         }
-            
-        
+
+
         public void DeleteLegalHold(long id)
         {
             this.Delete(DELETE_LEGALHOLD_WITH_ID.FormatResourceUrl(id));
         }
-            
+
         #endregion
 
 
         #region Action Items
-        
+
         public DateTime GetActionItemsLastEdit()
         {
             return this.Get<DateTime>(GET_ACTIONITEMS_LASTEDIT.FormatResourceUrl());
         }
-        
-        
+
+
         public IEnumerable<ActionItem> GetActionItemsFromJson(string json)
         {
             var page = this.GetActionItemsWithPageDataFromJson(json);
@@ -1756,44 +1756,44 @@ namespace RecordLion.RecordsManager.Client
             return page.Items;
         }
 
-        
+
         public IClientPagedItems<ActionItem> GetActionItemsWithPageDataFromJson(string json)
         {
             return JsonConvert.DeserializeObject<IClientPagedItems<ActionItem>>(json);
         }
-        
+
 
         public ActionItem GetActionItem(long id)
         {
             return this.Get<ActionItem>(GET_ACTIONITEM_WITH_ID.FormatResourceUrl(id));
         }
 
-            
+
         public ActionItem GetActionItemForRecord(long recordId)
         {
             return this.Get<ActionItem>(GET_ACTIONITEM_FOR_RECORDID.FormatResourceUrl(recordId));
         }
-        
-            
+
+
         public ActionItem GetActionItemForRecord(string identifier)
         {
             return this.Get<ActionItem>(GET_ACTIONITEM_FOR_RECORDIDENTIFIER.FormatResourceUrl(identifier));
         }
-        
-            
+
+
         public ActionItem UpdateActionItem(ActionItem actionItem)
         {
             return this.Put<ActionItem>(PUT_ACTIONITEM.FormatResourceUrl(), actionItem);
         }
-        
+
         #region Pending Action Items
-        
+
         public string GetPendingActionItemsAsJson()
         {
             return this.GetPendingActionItemsAsJson(0, 0);
         }
-            
-        
+
+
         public string GetPendingActionItemsAsJson(int page, int pageSize)
         {
             using (var client = this.GetClient())
@@ -1802,15 +1802,15 @@ namespace RecordLion.RecordsManager.Client
             }
         }
 
-        
+
         public IEnumerable<ActionItem> SearchPendingActionItemsByTitleOrUri(string recordTitleOrUri)
         {
             var page = this.SearchPendingActionItemsByTitleOrUri(recordTitleOrUri, 0, 0);
-            
+
             return page.Items;
         }
 
-        
+
         public IClientPagedItems<ActionItem> SearchPendingActionItemsByTitleOrUri(string recordTitleOrUri, int page, int pageSize)
         {
             return this.Get<ClientPagedItems<ActionItem>>(GET_PENDING_ACTIONITEMS_CONTAINING_RECORDTITLEORURI.FormatResourceUrl(recordTitleOrUri, page, pageSize));
@@ -1844,41 +1844,41 @@ namespace RecordLion.RecordsManager.Client
             return this.Get<ClientPagedItems<ActionItem>>(GET_PENDING_SYSTEM_ACTIONITEMS_CONTAINING_RECORDURI.FormatResourceUrl(recordUri, page, pageSize));
         }
 
-        
+
         public IEnumerable<ActionItem> GetPendingActionItems()
         {
             var page = this.GetPendingActionItems(0, 0);
-        
+
             return page.Items;
         }
-            
-        
+
+
         public IClientPagedItems<ActionItem> GetPendingActionItems(int page, int pageSize)
         {
             return this.Get<ClientPagedItems<ActionItem>>(GET_PENDING_ACTIONITEMS_ALL.FormatResourceUrl(page, pageSize));
         }
-            
-        
+
+
         public ActionItem UpdatePendingActionItemCompleted(long id)
         {
             return this.Put<ActionItem>(PUT_PENDING_ACTIONITEM_COMPLETED.FormatResourceUrl(id), id);
         }
-            
+
 
         public ActionItem UpdatePendingActionItemFailed(long id)
         {
             return this.Put<ActionItem>(PUT_PENDING_ACTIONITEM_FAILED.FormatResourceUrl(id), id);
         }
-        
-        
+
+
         public ActionItem UpdatePendingActionItemUnsupported(long id)
         {
             return this.Put<ActionItem>(PUT_PENDING_ACTIONITEM_UNSUPPORTED.FormatResourceUrl(id), id);
         }
-        
+
         #endregion
-            
-        
+
+
         #region Inbox Action Items
 
         public string GetInboxActionItemsAsJson()
@@ -1912,7 +1912,7 @@ namespace RecordLion.RecordsManager.Client
         public IEnumerable<InboxActionItem> SearchInboxActionItems(string title)
         {
             var page = this.SearchInboxActionItems(title, 0, 0);
-        
+
             return page.Items;
         }
 
@@ -1926,7 +1926,7 @@ namespace RecordLion.RecordsManager.Client
         public IEnumerable<InboxActionItem> GetInboxActionItems()
         {
             var page = this.GetInboxActionItems(0, 0);
-        
+
             return page.Items;
         }
 
@@ -1936,14 +1936,16 @@ namespace RecordLion.RecordsManager.Client
             return this.Get<ClientPagedItems<InboxActionItem>>(GET_INBOX_ACTIONITEMS_ALL.FormatResourceUrl(page, pageSize));
         }
 
+
         public IClientPagedItems<ActionItem> GetInboxActionItemsForCase(InboxActionItem caseItem, int page, int pageSize)
         {
             if (!caseItem.IsCaseFile)
                 return null;
 
-            return this.Get<ClientPagedItems<ActionItem>>(GET_INBOX_ACTIONITEMS_CASE.FormatResourceUrl(caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported, page, pageSize));
+            return this.Get<ClientPagedItems<ActionItem>>(GET_INBOX_ACTIONITEMS_CASE.FormatResourceUrl(caseItem.Id, page, pageSize));
         }
-            
+
+
         public void UpdateInboxActionItemApprove(long id)
         {
             this.Put(PUT_INBOX_ACTIONITEM_APPROVE.FormatResourceUrl(id), id);
@@ -1970,24 +1972,25 @@ namespace RecordLion.RecordsManager.Client
 
         public void UpdateInboxCaseApprove(InboxActionItem caseItem)
         {
-            this.Put(PUT_INBOX_ACTIONITEMS_APPROVE_CASE.FormatResourceUrl(caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported), null);
+            this.Put(PUT_INBOX_ACTIONITEMS_APPROVE_CASE.FormatResourceUrl(caseItem.Id), null);
         }
 
 
         public void UpdateInboxCaseDismiss(InboxActionItem caseItem)
         {
-            this.Put(PUT_INBOX_ACTIONITEMS_DISMISS_CASE.FormatResourceUrl(caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported), null);
+            this.Put(PUT_INBOX_ACTIONITEMS_DISMISS_CASE.FormatResourceUrl(caseItem.Id), null);
         }
 
 
         public void UpdateInboxCaseRetry(InboxActionItem caseItem)
         {
-            this.Put(PUT_INBOX_ACTIONITEMS_RETRY_CASE.FormatResourceUrl(caseItem.CaseFileId, caseItem.RetentionExpirationDate, caseItem.PhaseOrder, caseItem.PhaseAction, caseItem.IsApproved, caseItem.AutomationFailed, caseItem.AutomationUnsupported), null);
+            this.Put(PUT_INBOX_ACTIONITEMS_RETRY_CASE.FormatResourceUrl(caseItem.Id), null);
         }
 
 
         #endregion
-        
+
+
         #endregion
 
 
@@ -2337,15 +2340,15 @@ namespace RecordLion.RecordsManager.Client
 
             client.BaseAddress = this.baseUrl;
             client.Headers.Add(HttpRequestHeader.ContentType, HEADER_CONTENTTYPE);
-        
+
             if (this.cookieContainer != null)
                 client.CookieContainer = this.cookieContainer;
             else
                 client.Headers.Add(HttpRequestHeader.Authorization, this.GetAuthorizationHeaderValue());
-        
+
             return client;
         }
-        
+
 
         private T Get<T>(string resourceUrl)
         {
@@ -2355,8 +2358,8 @@ namespace RecordLion.RecordsManager.Client
                 return JsonConvert.DeserializeObject<T>(response, incomingJsonSettings);
             }
         }
-        
-            
+
+
         private T Post<T>(string resourceUrl, object data)
         {
             try
@@ -2367,7 +2370,7 @@ namespace RecordLion.RecordsManager.Client
 
                     var request = JsonConvert.SerializeObject(data, outgoingJsonSettings);
                     var response = client.UploadString(new Uri(resourceUrl, UriKind.Relative), "POST", request);
-            
+
                     return JsonConvert.DeserializeObject<T>(response, incomingJsonSettings);
                 }
             }
@@ -2377,12 +2380,12 @@ namespace RecordLion.RecordsManager.Client
 
                 if (updateException != null)
                     throw updateException;
-            
+
                 throw;
             }
         }
-                    
-        
+
+
         private T Put<T>(string resourceUrl, object data)
         {
             try
@@ -2390,10 +2393,10 @@ namespace RecordLion.RecordsManager.Client
                 using (var client = this.GetClient())
                 {
                     this.SetDateTimeKindsToLocal(data);
-            
+
                     var request = JsonConvert.SerializeObject(data, outgoingJsonSettings);
                     var response = client.UploadString(new Uri(resourceUrl, UriKind.Relative), "PUT", request);
-                
+
                     return JsonConvert.DeserializeObject<T>(response, incomingJsonSettings);
                 }
             }
@@ -2403,12 +2406,12 @@ namespace RecordLion.RecordsManager.Client
 
                 if (updateException != null)
                     throw updateException;
-            
+
                 throw;
             }
         }
-                    
-        
+
+
         private void Put(string resourceUrl, object data)
         {
             try
@@ -2416,7 +2419,7 @@ namespace RecordLion.RecordsManager.Client
                 using (var client = this.GetClient())
                 {
                     this.SetDateTimeKindsToLocal(data);
-            
+
                     var request = JsonConvert.SerializeObject(data, outgoingJsonSettings);
                     client.UploadString(new Uri(resourceUrl, UriKind.Relative), "PUT", request);
                 }
@@ -2424,15 +2427,15 @@ namespace RecordLion.RecordsManager.Client
             catch (WebException ex)
             {
                 var updateException = this.ConvertValidationDetailsToUpdateException(ex);
-        
+
                 if (updateException != null)
                     throw updateException;
-        
+
                 throw;
             }
         }
-                
-                
+
+
         private void Delete(string resourceUrl)
         {
             try
@@ -2445,15 +2448,15 @@ namespace RecordLion.RecordsManager.Client
             catch (WebException ex)
             {
                 var updateException = this.ConvertValidationDetailsToUpdateException(ex);
-                
+
                 if (updateException != null)
                     throw updateException;
-        
+
                 throw;
             }
         }
-        
-            
+
+
         private string GetAuthorizationHeaderValue()
         {
             if (this.credentials != null)
@@ -2466,11 +2469,11 @@ namespace RecordLion.RecordsManager.Client
                         return GetClaimsAuthorizationHeaderValue();
                 }
             }
-            
+
             return string.Empty;
         }
-        
-        
+
+
         private string GetBasicAuthorizationHeaderValue()
         {
             if (credentials != null)
@@ -2478,11 +2481,11 @@ namespace RecordLion.RecordsManager.Client
                 var buffer = Encoding.ASCII.GetBytes($"{this.credentials.Username}:{this.credentials.Password}");
                 return $"Basic {Convert.ToBase64String(buffer)}";
             }
-                    
+
             return string.Empty;
         }
-                        
-                
+
+
         private string GetClaimsAuthorizationHeaderValue()
         {
             if (string.IsNullOrEmpty(this.issuer))
@@ -2490,39 +2493,39 @@ namespace RecordLion.RecordsManager.Client
                 using (var client = new WebClient())
                 {
                     client.BaseAddress = this.baseUrl;
-        
+
                     var response = client.DownloadString(new Uri(GET_WSTRUST_ADDRESS, UriKind.Relative));
                     this.issuer = JsonConvert.DeserializeObject<string>(response);
                 }
             }
-            
+
             if (this.token == null || this.token.ExpiresOn < DateTime.Now)
                 this.token = this.securityTokenRequestor.RequestToken(this.issuer, this.baseUrl, this.credentials);
-        
+
             if (this.token != null)
             {
                 var buffer = Encoding.ASCII.GetBytes(token.Token);
                 return $"{this.token.TokenType} {Convert.ToBase64String(buffer)}";
             }
-            
+
             return string.Empty;
         }
-                    
-        
+
+
         private UpdateException ConvertValidationDetailsToUpdateException(WebException ex)
         {
             var response = ex.Response as HttpWebResponse;
-            
+
             if (response != null)
             {
                 UpdateException updateException = new UpdateException(response.StatusDescription);
-                
+
                 using (StreamReader sr = new StreamReader(response.GetResponseStream()))
                 {
                     if (response.Headers["RM-Validation-Details"] == bool.TrueString)
                     {
                         updateException.ErrorDetail = "Retrieve the Errors property for for a list of the update errors.";
-                        
+
                         ProcessRMValidationDetails(updateException, sr);
                     }
                     else
@@ -2530,37 +2533,37 @@ namespace RecordLion.RecordsManager.Client
                         updateException.ErrorDetail = sr.ReadToEnd();
                     }
                 }
-                
+
                 return updateException;
             }
-                
+
             return null;
         }
-                
-                    
+
+
         private static void ProcessRMValidationDetails(UpdateException updateException, StreamReader sr)
         {
             string content = sr.ReadLine();
-                        
+
             while (content != null)
             {
                 //We skip the first line by reading the line again
                 content = sr.ReadLine();
-                    
+
                 if (!string.IsNullOrEmpty(content))
                 {
                     string[] parts = content.Split(new string[] { ";#" }, StringSplitOptions.RemoveEmptyEntries);
-            
+
                     string message = parts[0];
-            
+
                     if (parts.Length > 1)
                     {
                         string memberValue = parts[1];
-        
+
                         if (!string.IsNullOrEmpty(memberValue))
                         {
                             string[] members = memberValue.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            
+
                             foreach (var member in members)
                             {
                                 updateException.Errors.Add(new UpdateError(member, message));
@@ -2572,8 +2575,8 @@ namespace RecordLion.RecordsManager.Client
                 }
             }
         }
-                    
-                        
+
+
         private void SetDateTimeKindsToLocal(object data)
         {
             foreach (var property in data.GetType()
@@ -2583,33 +2586,33 @@ namespace RecordLion.RecordsManager.Client
             {
                 var getMethod = property.GetGetMethod();
                 var setMethod = property.GetSetMethod();
-                        
+
                 if (getMethod != null && setMethod != null)
                 {
                     DateTime? currentValue = getMethod.Invoke(data, null) as DateTime?;
-                
+
                     if (currentValue.HasValue && currentValue.Value.Kind == DateTimeKind.Unspecified)
                     {
                         setMethod.Invoke(data, new object[] { DateTime.SpecifyKind(currentValue.Value, DateTimeKind.Local) });
                     }
                 }
             }
-        }                     
+        }
 
-                                  
+
         #endregion
-                                                     
-            
+
+
         #region Constants
-                
+
         private const string HEADER_CONTENTTYPE = "application/json";
-                
+
         private const string GET_WSTRUST_ADDRESS = "/api/v1/trust";
-        
+
         private const string GET_SYSTEMINFO = "/api/system";
-                    
+
         private const string GET_NEWRMUID = "/api/v1/rmuid";
-                    
+
         private const string GET_RECORDCLASSES_LASTEDIT = "/api/v1/recordclasses?lastedit";
         private const string GET_RECORDCLASSES = "/api/v1/recordclasses?page={0}&pageSize={1}&parentId={2}";
         private const string GET_RECORDCLASSES_ALL = "/api/v1/recordclasses?all=true&page={0}&pageSize={1}";
@@ -2621,9 +2624,9 @@ namespace RecordLion.RecordsManager.Client
         private const string POST_RECORDCLASS = "/api/v1/recordclasses";
         private const string PUT_RECORDCLASS = "/api/v1/recordclasses";
         private const string DELETE_RECORDCLASS_WITH_ID = "/api/v1/recordclasses/{0}";
-        
+
         private const string GET_RECORDS_LASTEDIT = "/api/v1/records?lastedit";
-        private const string GET_RECORDS_ALL = "/api/v1/records?page={0}&pageSize={1}";        
+        private const string GET_RECORDS_ALL = "/api/v1/records?page={0}&pageSize={1}";
         private const string GET_RECORDS_CONTAINING_TITLEORURI = "/api/v1/records?titleOrUri={0}&page={1}&pageSize={2}";
         private const string GET_RECORDS_FOR_CONTAINER = "/api/v1/records?container=true&containerId={0}page={1}&pageSize={2}";
         private const string GET_RECORDS_FOR_RECORDCLASS = "/api/v1/records?classId={0}&page={1}&pageSize={2}";
@@ -2633,7 +2636,7 @@ namespace RecordLion.RecordsManager.Client
         private const string PUT_RECORD_DECLARATION = "/api/v1/records?uri={0}";
         private const string PUT_RECORD_DECLARATION_WITH_ID = "/api/v1/records?id={0}";
         private const string PUT_RECORD_DECLARATION_WITH_IDENTIFIER = "/api/v1/records?identifier={0}";
-        
+
         private const string GET_CONTAINERS_LASTEDIT = "/api/v1/containers?lastedit";
         private const string GET_CONTAINERS = "/api/v1/containers?page={0}&pageSize={1}&parentId={2}";
         private const string GET_CONTAINERS_ALL = "api/v1/containers?all=true&page={0}&pageSize={1}";
@@ -2643,7 +2646,7 @@ namespace RecordLion.RecordsManager.Client
         private const string POST_CONTAINER = "/api/v1/containers";
         private const string PUT_CONTAINER = "/api/v1/containers";
         private const string DELETE_CONTAINER_WITH_ID = "/api/v1/containers/{0}";
-        
+
         private const string GET_BARCODES_LASTEDIT = "/api/v1/barcodes?lastedit";
         private const string GET_BARCODES_GENERATE = "/api/v1/barcodes/{0}?generate";
         private const string GET_BARCODES_ALL = "/api/v1/barcodes?page={0}&pageSize={1}";
@@ -2652,7 +2655,7 @@ namespace RecordLion.RecordsManager.Client
         private const string POST_BARCODE = "/api/v1/barcodes";
         private const string PUT_BARCODE = "/api/v1/barcodes";
         private const string DELETE_BARCODE = "/api/v1/barcodes/{0}";
-        
+
         private const string POST_RECORDIZERS = "/api/v1/recordization";
         private const string DELETE_RECORDIZERS = "/api/v1/recordization?uri={0}&all={1}";
 
@@ -2688,7 +2691,7 @@ namespace RecordLion.RecordsManager.Client
         private const string POST_MANAGEDPROPERTY = "/api/v1/managedproperties";
         private const string PUT_MANAGEDPROPERTY = "/api/v1/managedproperties";
         private const string DELETE_MANAGEDPROPERTY_WITH_ID = "/api/v1/managedproperties/{0}";
-        
+
         private const string GET_RECORDCLASSLIFECYCLES_LASTEDIT = "/api/v1/recordclasslifecycles?lastedit";
         private const string GET_RECORDCLASSLIFECYCLES_ALL = "/api/v1/recordclasslifecycles?page={0}&pageSize={1}";
         private const string GET_RECORDCLASSLIFECYCLES_RECORDCLASSTITLEORLIFECYCLETITLE = "/api/v1/recordclasslifecycles?recordClassTitleOrLifecycleTitle={0}&page={1}&pageSize={2}";
@@ -2697,20 +2700,20 @@ namespace RecordLion.RecordsManager.Client
         private const string POST_RECORDCLASSLIFECYCLE = "/api/v1/recordclasslifecycles";
         private const string PUT_RECORDCLASSLIFECYCLE = "/api/v1/recordclasslifecycles";
         private const string DELETE_RECORDCLASSLIFECYCLE_WITH_ID = "/api/v1/recordclasslifecycles/{0}";
-        
+
         private const string GET_EVENTOCCURRENCES_LASTEDIT = "/api/v1/eventoccurrences?lastedit";
         private const string GET_EVENTOCCURRENCES_ALL = "/api/v1/eventoccurrences?page={0}&pageSize={1}";
         private const string GET_EVENTOCCURRENCES_CONTAINING_EVENTTITLE = "/api/v1/eventoccurrences?eventTitle={0}&page={1}&pageSize={2}";
         private const string GET_EVENTOCCURRENCE_WITH_ID = "/api/v1/eventoccurrences/{0}";
         private const string POST_EVENTOCCURRENCE = "/api/v1/eventoccurrences";
         private const string DELETE_EVENTOCCURRENCE_WITH_ID = "/api/v1/eventoccurrences/{0}";
-        
+
         private const string GET_ACTIONITEMS_LASTEDIT = "/api/v1/actionitems?lastedit";
         private const string GET_ACTIONITEM_WITH_ID = "/api/v1/actionitems?id={0}";
         private const string GET_ACTIONITEM_FOR_RECORDID = "/api/v1/actionitems?recordId={0}";
         private const string GET_ACTIONITEM_FOR_RECORDIDENTIFIER = "/api/v1/actionitems?identifier={0}";
         private const string PUT_ACTIONITEM = "/api/v1/actionitems";
-        
+
         private const string GET_PENDING_ACTIONITEMS_ALL = "/api/v1/actionitemspending?page={0}&pageSize={1}";
         private const string GET_PENDING_ACTIONITEMS_CONTAINING_RECORDTITLEORURI = "/api/v1/actionitemspending?recordTitleOrUri={0}&page={1}&pageSize={2}";
         private const string GET_PENDING_ACTIONITEMS_CONTAINING_RECORDURI = "/api/v1/actionitemspending?recordUri={0}&page={1}&pageSize={2}";
@@ -2718,27 +2721,27 @@ namespace RecordLion.RecordsManager.Client
         private const string PUT_PENDING_ACTIONITEM_COMPLETED = "/api/v1/actionitemspending?complete=true&id={0}";
         private const string PUT_PENDING_ACTIONITEM_FAILED = "/api/v1/actionitemspending?failed=true&id={0}";
         private const string PUT_PENDING_ACTIONITEM_UNSUPPORTED = "/api/v1/actionitemspending?unsupported=true&id={0}";
-        
+
         private const string GET_INBOX_ACTIONITEMS_ALL = "/api/v1/actionitemsinbox?page={0}&pageSize={1}";
         private const string GET_INBOX_ACTIONITEMS_CONTAINING_TITLE = "/api/v1/actionitemsinbox?title={0}&page={1}&pageSize={2}";
-        private const string GET_INBOX_ACTIONITEMS_CASE = "/api/v1/actionitemsinbox?caseFileId={0}&expiringOnOrBefore={1}&phaseOrder={2}&phaseAction={3}&isApproved={4}&automationFailed={5}&automationUnsupported={6}&page={7}&pageSize={8}";
+        private const string GET_INBOX_ACTIONITEMS_CASE = "/api/v1/actionitemsinbox?inboxItemId={0}&page={1}&pageSize={2}";
         private const string PUT_INBOX_ACTIONITEM_APPROVE = "/api/v1/actionitemsinbox?approve=true&id={0}";
         private const string PUT_INBOX_ACTIONITEM_DISMISS = "/api/v1/actionitemsinbox?dismiss=true&id={0}";
         private const string PUT_INBOX_ACTIONITEM_RETRY = "/api/v1/actionitemsinbox?retry=true&id={0}";
         private const string PUT_INBOX_ACTIONITEM_COMPLETED = "/api/v1/actionitemsinbox?complete=true&id={0}";
-        private const string PUT_INBOX_ACTIONITEMS_APPROVE_CASE = "/api/v1/actionitemsinbox?approve=true&caseFileId={0}&expiringOnOrBefore={1}&phaseOrder={2}&phaseAction={3}&isApproved={4}&automationFailed={5}&automationUnsupported={6}";
-        private const string PUT_INBOX_ACTIONITEMS_DISMISS_CASE = "/api/v1/actionitemsinbox?dismiss=true&caseFileId={0}&expiringOnOrBefore={1}&phaseOrder={2}&phaseAction={3}&isApproved={4}&automationFailed={5}&automationUnsupported={6}";
-        private const string PUT_INBOX_ACTIONITEMS_RETRY_CASE = "/api/v1/actionitemsinbox?retry=true&caseFileId={0}&expiringOnOrBefore={1}&phaseOrder={2}&phaseAction={3}&isApproved={4}&automationFailed={5}&automationUnsupported={6}";
-        
+        private const string PUT_INBOX_ACTIONITEMS_APPROVE_CASE = "/api/v1/actionitemsinbox?approve=true&inboxItemId={0}";
+        private const string PUT_INBOX_ACTIONITEMS_DISMISS_CASE = "/api/v1/actionitemsinbox?dismiss=true&inboxItemId={0}";
+        private const string PUT_INBOX_ACTIONITEMS_RETRY_CASE = "/api/v1/actionitemsinbox?retry=true&inboxItemId={0}";
+
         private const string GET_AUDIT_LASTEDIT = "/api/v1/audit?lastedit";
         private const string GET_AUDIT_ALL = "/api/v1/audit?page={0}&pageSize={1}";
         private const string GET_AUDIT_IN_RANGE = "/api/v1/audit?rangeStart={0}&rangeEnd={1}&page={2}&pageSize={3}";
         private const string GET_AUDIT_FOR_TARGET = "/api/v1/audit?target={0}&targetId={1}&page={2}&pageSize={3}";
         private const string GET_AUDIT_FOR_RECORDURI = "/api/v1/audit?recordUri={0}&page={1}&pageSize={2}";
         private const string POST_AUDIT = "/api/v1/audit";
-        
+
         private const string POST_HEARTBEAT = "/api/v1/heartbeat?supportsFailover={0}";
-        
+
         private const string GET_LEGALCASES_LASTEDIT = "/api/v1/legalcases?lastedit";
         private const string GET_LEGALCASES_ALL = "/api/v1/legalcases?page={0}&pageSize={1}";
         private const string GET_LEGALCASES_CONTAINING_TITLEORNUMBER = "/api/v1/legalcases?titleOrNumber={0}&page={1}&pageSize={2}";
@@ -2747,7 +2750,7 @@ namespace RecordLion.RecordsManager.Client
         private const string POST_LEGALCASES = "/api/v1/legalcases";
         private const string PUT_LEGALCASES = "/api/v1/legalcases";
         private const string DELETE_LEGALCASES_WITH_ID = "/api/v1/legalcases/{0}";
-        
+
         private const string GET_LEGALHOLDS_ALL = "/api/v1/legalholds?page={0}&pageSize={1}";
         private const string GET_LEGALHOLDS_OPEN = "/api/v1/legalholds?open=1&page={0}&pageSize={1}";
         private const string GET_LEGALHOLDS_OPEN_CONTAINING_URI = "/api/v1/legalholds?uri={0}&open=1&page={1}&pageSize={2}";

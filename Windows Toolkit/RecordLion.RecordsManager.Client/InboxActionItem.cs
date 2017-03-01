@@ -4,6 +4,8 @@ namespace RecordLion.RecordsManager.Client
 {
     public class InboxActionItem
     {
+        public string Id { get; set; }
+
         public long? ActionItemId { get; set; }
 
         public bool? AutomationFailed { get; set; }
