@@ -9,9 +9,6 @@ namespace RecordLion.RecordsManager.Client.Controls
 {
     public partial class ManageRecordDialog : Window, IDisposable
     {
-        private static CookieContainer cookies = null;
-
-
         private string recordsManagerUrl = null;
         private string recordUri = null;               
 

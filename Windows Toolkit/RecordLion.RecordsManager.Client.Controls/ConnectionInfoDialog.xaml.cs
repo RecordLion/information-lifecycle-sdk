@@ -25,7 +25,7 @@ namespace RecordLion.RecordsManager.Client.Controls
         {
             if (!string.IsNullOrEmpty(this.RecordsManagerUrl))
             {
-                RecordsManagerClient client = RecordsManagerClientFactory.Create(this.RecordsManagerUrl);
+                RecordsManagerClient client = new RecordsManagerClient(this.RecordsManagerUrl);
 
                 if (client.GetSystemInfo() != null)
                 {

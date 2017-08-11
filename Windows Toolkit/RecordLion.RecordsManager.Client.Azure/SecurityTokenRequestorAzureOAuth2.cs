@@ -12,7 +12,7 @@ namespace RecordLion.RecordsManager.Client
         private string appId = null;
 
         public SecurityTokenRequestorAzureOAuth2()
-            : this(Constants.AZ_URL_RLIL)
+            : this(Constants.AZ_APPID_RLIL)
         {
 
         }

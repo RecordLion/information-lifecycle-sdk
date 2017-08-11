@@ -144,14 +144,14 @@ namespace RecordLion.RecordsManager.Client.Controls
                 {
                     if (this.CookieContainer != null)
                     {
-                        this.Model.Client = RecordsManagerClientFactory.Create(this.RecordsManagerUrl, this.CookieContainer);
+                        this.Model.Client = new RecordsManagerClient(this.RecordsManagerUrl, this.CookieContainer);
                     }
                     else if (this.Credentials != null)
                     {
-                        this.Model.Client = RecordsManagerClientFactory.Create(this.RecordsManagerUrl, this.Credentials);
+                        this.Model.Client = new RecordsManagerClient(this.RecordsManagerUrl, this.Credentials);
                     }
                     else
-                        this.Model.Client = RecordsManagerClientFactory.Create(this.RecordsManagerUrl);
+                        this.Model.Client = new RecordsManagerClient(this.RecordsManagerUrl);
                 }
                 else
                     this.Model.Client = null;

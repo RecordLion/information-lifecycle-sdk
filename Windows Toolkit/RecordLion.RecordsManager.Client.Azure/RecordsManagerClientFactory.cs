@@ -27,7 +27,11 @@ namespace RecordLion.RecordsManager.Client
             }
             else if (url.TrimEnd('/').Equals(Constants.AZ_URL_RLIL_TEST, StringComparison.OrdinalIgnoreCase))
             {
-                return new RecordsManagerClient(url, credentials, new SecurityTokenRequestorAzureOAuth2(Constants.AZ_URL_RLIL_TEST));
+                return new RecordsManagerClient(url, credentials, new SecurityTokenRequestorAzureOAuth2(Constants.AZ_APPID_RLIL_TEST));
+            }
+            else if (url.TrimEnd('/').Equals(Constants.AZ_URL_RLIL_DEV, StringComparison.OrdinalIgnoreCase))
+            {
+                return new RecordsManagerClient(url, credentials, new SecurityTokenRequestorAzureOAuth2(Constants.AZ_APPID_RLIL_DEV));
             }
             else
             {
