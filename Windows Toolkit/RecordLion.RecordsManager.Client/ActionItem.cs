@@ -17,6 +17,8 @@ namespace RecordLion.RecordsManager.Client
 
         public bool? AutomationUnsupported { get; set; }
 
+        public int? PhaseStep { get; set; }
+
         public DateTime RetentionExpirationDate { get; set; }
 
         public DateTime CreatedDate { get; set; }

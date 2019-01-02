@@ -35,11 +35,7 @@ namespace RecordLion.RecordsManager.Client
 
         public bool? IsVital { get; set; }
 
-        public long? ContainerId { get; set; }
-
-        public string Barcode { get; set; }
-
-        public string BarcodeAlt { get; set; }
+        public bool? IsPhysical { get; set; }
 
         public RecordizeProperty[] Properties { get; set; }
     }

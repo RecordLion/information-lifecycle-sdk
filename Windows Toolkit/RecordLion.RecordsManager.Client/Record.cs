@@ -53,11 +53,7 @@ namespace RecordLion.RecordsManager.Client
 
         public bool IsPermanent { get; set; }
 
-        public long? ContainerId { get; set; }
-
-        public string Barcode { get; set; }
-
-        public string BarcodeAlt { get; set; }
+        public bool IsPhysical { get; set; }
 
         public DateTime? RetentionExpirationDate { get; set; }
 
@@ -66,13 +62,5 @@ namespace RecordLion.RecordsManager.Client
         public DateTime CreatedDate { get; set; }
 
         public DateTime ModifiedDate { get; set; }
-        
-        public bool IsPhysical
-        {
-            get
-            {
-                return this.ContainerId.HasValue;
-            }
-        }
     }
 }

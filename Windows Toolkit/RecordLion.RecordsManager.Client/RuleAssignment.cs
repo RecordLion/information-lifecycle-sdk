@@ -24,5 +24,7 @@ namespace RecordLion.RecordsManager.Client
         public long? RuleSetRefId { get; set; }
 
         public long? RuleRefId { get; set; }
+
+        public bool SystemRule { get; set; }
     }
 }

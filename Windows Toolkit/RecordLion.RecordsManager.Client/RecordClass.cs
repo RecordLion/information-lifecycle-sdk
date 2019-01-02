@@ -27,6 +27,8 @@ namespace RecordLion.RecordsManager.Client
         
         public bool ArchiveRecordAudits { get; set; }
 
+        public bool GenerateDestructionCerts { get; set; }
+
         public RecordClassRecordDeclarationRule RecordDeclarationRule { get; set; }
 
         public RecordClassVitalRule VitalRule { get; set; }
@@ -57,6 +59,6 @@ namespace RecordLion.RecordsManager.Client
 
         public string CaseFileRule { get; set; }
 
-        public bool UniqueLifecycle { get; set; }
+        public bool UniqueLifecycle { get; set; }        
     }
 }

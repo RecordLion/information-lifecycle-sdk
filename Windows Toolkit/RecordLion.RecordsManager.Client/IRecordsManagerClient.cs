@@ -23,8 +23,14 @@ namespace RecordLion.RecordsManager.Client
 
         string NewRMUID();
 
+        string Get(string resourceUrl);
+        T Get<T>(string resourceUrl);
+        T Post<T>(string resourceUrl, object data);
+        void Delete(string resourceUrl);
+        T Put<T>(string resourceUrl, object data);
+
         #region Record Classes
-        
+
         string GetAllRecordClassesAsJson();
         
 
@@ -109,7 +115,6 @@ namespace RecordLion.RecordsManager.Client
 
         #endregion
 
-
         #region Records
 
         DateTime GetRecordsLastEdit();
@@ -127,12 +132,6 @@ namespace RecordLion.RecordsManager.Client
         string GetRecordsForRecordClassAsJson(long recordClassId, int page, int pageSize);
 
 
-        string GetRecordsForContainerAsJson(long containerId);
-
-        
-        string GetRecordsForContainerAsJson(long containerId, int page, int pageSize);
-
-        
         IEnumerable<Record> GetRecordsFromJson(string json);
 
         
@@ -157,12 +156,6 @@ namespace RecordLion.RecordsManager.Client
         IClientPagedItems<Record> GetRecordsForRecordClass(long recordClassId, int page, int pageSize);
 
 
-        IEnumerable<Record> GetRecordsForContainer(long containerId);
-
-        
-        IClientPagedItems<Record> GetRecordsForContainer(long containerId, int page, int pageSize);
-
-        
         Record GetRecord(long id);
 
         
@@ -233,99 +226,6 @@ namespace RecordLion.RecordsManager.Client
 
         #endregion
 
-
-        #region Containers
-
-        string GetAllContainersAsJson();
-        
-
-        string GetAllContainersAsJson(int page, int pageSize);
-
-
-        string GetContainersAsJson(long? parentId = null);
-
-
-        string GetContainersAsJson(int page, int pageSize, long? parentId = null);
-
-
-        IEnumerable<Container> GetContainersFromJson(string json);
-
-
-        IClientPagedItems<Container> GetContainersWithPageDataFromJson(string json);
-
-
-        DateTime GetContainerLastEdit();
-
-
-        IEnumerable<Container> SearchContainers(string title);
-
-
-        IClientPagedItems<Container> SearchContainers(string title, int page, int pageSize);
-
-
-        IEnumerable<Container> GetAllContainers();
-
-
-        IClientPagedItems<Container> GetAllContainers(int page, int pageSize);
-
-
-        IEnumerable<Container> GetContainers(long? parentId = null);
-
-
-        IClientPagedItems<Container> GetContainers(int page, int pageSize, long? parentId = null);
-
-
-        Container GetContainer(long id);
-
-
-        Container GetContainer(string barcode);
-
-
-        Container CreateContainer(Container container);
-
-
-        Container UpdateContainer(Container container);
-
-
-        void DeleteContainer(long id);        
-
-        #endregion
-        
-
-        #region Barcodes
-        
-        string GenerateBarcode(long barcodeSchemeId);
-
-        
-        DateTime GetBarcodeSchemesLastEdit();
-        
-
-        IEnumerable<BarcodeScheme> SearchBarcodeSchemes(string title);
-        
-
-        IClientPagedItems<BarcodeScheme> SearchBarcodeSchemes(string title, int page, int pageSize);
-        
-
-        IEnumerable<BarcodeScheme> GetBarcodeSchemes();
-        
-
-        IClientPagedItems<BarcodeScheme> GetBarcodeSchemes(int page, int pageSize);
-        
-
-        BarcodeScheme GetBarcodeScheme(long id);
-        
-
-        BarcodeScheme CreateBarcodeScheme(BarcodeScheme scheme);
-        
-
-        BarcodeScheme UpdateBarcodeScheme(BarcodeScheme scheme);
-        
-
-        void DeleteBarcodeScheme(long id);
-        
-        #endregion
-
-        
         #region Recordization
 
         IEnumerable<Record> ProcessRecordization(IEnumerable<Recordize> recordizers);
@@ -334,7 +234,6 @@ namespace RecordLion.RecordsManager.Client
         void DeleteRecordization(string recordizedUrl, bool deleteAll);
 
         #endregion
-
 
         #region Triggers
 
@@ -378,7 +277,6 @@ namespace RecordLion.RecordsManager.Client
 
         #endregion
 
-
         #region Retentions
 
         string GetRetentionsAsJson();
@@ -421,7 +319,6 @@ namespace RecordLion.RecordsManager.Client
         
         #endregion
 
-        
         #region Lifecyles
 
         string GetLifecylesAsJson();
@@ -467,7 +364,6 @@ namespace RecordLion.RecordsManager.Client
 
         #endregion
 
-
         #region RecordClass Lifecyles
 
         string GetRecordClassLifecyclesAsJson();
@@ -512,7 +408,6 @@ namespace RecordLion.RecordsManager.Client
         void DeleteRecordClassLifecycle(long id);
 
         #endregion
-        
 
         #region Event Occurrences
         
@@ -553,7 +448,6 @@ namespace RecordLion.RecordsManager.Client
         
         #endregion
 
-        
         #region Audit
 
         string GetAuditsAsJson();
@@ -599,7 +493,6 @@ namespace RecordLion.RecordsManager.Client
 
         #endregion
 
-
         #region Heartbeat
 
         HeartbeatResult Heartbeat(Heartbeat heartbeat);
@@ -609,7 +502,6 @@ namespace RecordLion.RecordsManager.Client
         
         #endregion
 
-        
         #region Legal Cases
 
         string GetLegalCasesAsJson();
@@ -664,7 +556,6 @@ namespace RecordLion.RecordsManager.Client
         
         #endregion
 
-        
         #region Legal Holds
 
         string GetLegalHoldsAsJson();
@@ -724,7 +615,6 @@ namespace RecordLion.RecordsManager.Client
         void DeleteLegalHold(long id);
 
         #endregion
-
 
         #region Action Items
 
@@ -846,79 +736,6 @@ namespace RecordLion.RecordsManager.Client
 
         #endregion
 
-
-        #region Record Requests
-
-        string GetRecordRequestsAsJson();
-
-
-        string GetRecordRequestsAsJson(int page, int pageSize);
-
-
-        IEnumerable<RecordRequest> GetRecordRequestsFromJson(string json);
-
-
-        IClientPagedItems<RecordRequest> GetRecordRequestsWithPageDataFromJson(string json);
-
-
-        DateTime GetRecordRequestsLastEdit();
-
-
-        IEnumerable<RecordRequest> GetRecordRequests();
-
-
-        IClientPagedItems<RecordRequest> GetRecordRequests(int page, int pageSize);
-
-
-        IEnumerable<RecordRequest> SearchRecordRequests(string title);
-
-
-        IClientPagedItems<RecordRequest> SearchRecordRequests(string title, int page, int pageSize);
-
-
-        RecordRequest GetRecordRequest(long id);
-
-
-        RecordRequest CreateRecordRequest(RecordRequest request);
-
-
-        RecordRequest UpdateRecordRequest(RecordRequest request);
-
-
-        void DeleteRecordRequest(long id);
-
-
-        #region Inbox Record Requests
-
-        string GetInboxRecordRequestsAsJson();
-
-
-        string GetInboxRecordRequestsAsJson(int page, int pageSize);
-
-
-        IEnumerable<RecordRequest> SearchInboxRecordRequests(string title);
-
-
-        IClientPagedItems<RecordRequest> SearchInboxRecordRequests(string title, int page, int pageSize);
-
-
-        IEnumerable<RecordRequest> GetInboxRecordRequests();
-
-
-        IClientPagedItems<RecordRequest> GetInboxRecordRequests(int page, int pageSize);
-
-
-        RecordRequest CloseRecordRequest(long id);
-
-
-        RecordRequest CloseAndFulfillRecordRequest(long id);
-
-
-        #endregion
-
-        #endregion
-
-
         #region Managed Properties
 
         string GetManagedPropertiesAsJson();
@@ -960,7 +777,6 @@ namespace RecordLion.RecordsManager.Client
         void DeleteManagedProperty(long id);
 
         #endregion
-
 
         #region Rule Sets
 
