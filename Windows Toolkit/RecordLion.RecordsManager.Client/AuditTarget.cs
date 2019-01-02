@@ -12,9 +12,6 @@ namespace RecordLion.RecordsManager.Client
         Lifecycle,
         EventOccurrence,
         LegalCase,
-        LegalHold,
-        Container,
-        BarcodeScheme,
-        Barcode
+        LegalHold
     }
 }

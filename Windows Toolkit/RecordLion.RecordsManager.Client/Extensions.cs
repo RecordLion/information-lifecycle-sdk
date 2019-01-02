@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RecordLion.RecordsManager.Client
 {
-    internal static class Extensions
+    public static class Extensions
     {
         public static string FormatResourceUrl(this string str, params object[] args)
         {
