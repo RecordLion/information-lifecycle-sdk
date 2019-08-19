@@ -12,7 +12,7 @@ The following overviews provide additional information on the SDK assemblies:
 SDK Assembly | Description
 ---  | ---
 RecordLion.RecordsManager.Client.dll | Contains a wrapper around the Information Lifecycle REST API to easily interact with Information Lifecycle Server.
-RecordLion.RecordsManager.PhysicalAssets.Client | Contains a wrapper around the Physical Records Management REST API to easily interact with Information Lifecycle Server hosting PRM.
+RecordLion.RecordsManager.PhysicalAssets.Client.dll | Contains a wrapper around the Physical Records Management REST API to easily interact with Information Lifecycle Server hosting PRM.
 RecordLion.RecordsManager.Client.Controls.dll | Contain a set of reusable Windows UI Components that can be used to build Windows Applications.
 RecordLion.Resources.dll | Contains localized resources
 
