@@ -1,7 +1,7 @@
 # Information Lifecycle SDK
 Welcome to the official home of the RecordLion Information Lifecycle SDK!
 
- __*Version 4.6.4*__
+ __*Version 4.6.5*__
 
 ## Overview
 The SDK aims to provide working sample apps demonstrating how to develop custom 
